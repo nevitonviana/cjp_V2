@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 final ThemeData theme = ThemeData(
-  scaffoldBackgroundColor: Colors.grey[200],
+  scaffoldBackgroundColor: Colors.grey[300],
   textTheme: const TextTheme(
     bodyText1: TextStyle(color: Colors.black),
     bodyText2: TextStyle(color: Colors.black),

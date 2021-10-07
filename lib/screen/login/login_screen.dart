@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/widgets/widgets.dart';
+import 'controller/login_controller.dart';
+import 'widgets/button_animated.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoginController _loginController = LoginController();
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -35,39 +39,44 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 35),
-                  const TextFieldCustom(
-                    label: "E-mail",
-                    prefixIcon: Icon(
-                      Icons.account_box,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const TextFieldCustom(
-                    label: "Senha",
-                    prefixIcon: Icon(
-                      Icons.lock_outline_rounded,
-                      color: Colors.black87,
-                    ),
-                    //remove_red_eye_outlined
-                    suffix: Icon(Icons.remove_red_eye),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _loginController.setEmail,
+                      errorText: _loginController.errorEmail,
+                      label: "E-mail",
+                      prefixIcon: const Icon(
+                        Icons.account_box,
+                        color: Colors.black87,
+                      ),
+                    );
+                  }),
+                  Observer(
+                    builder: (_) {
+                      return TextFieldCustom(
+                        onChanged: _loginController.setPassword,
+                        errorText: _loginController.errorPassword,
+                        label: "Senha",
+                        prefixIcon: const Icon(
+                          Icons.lock_outline_rounded,
+                          color: Colors.black87,
+                        ),
+                        obscureText: _loginController.visibilityPassword,
+                        suffix: GestureDetector(
+                          onTap: () => _loginController.setVisibilityPassword(
+                              !_loginController.visibilityPassword),
+                          child: Icon(
+                            _loginController.visibilityPassword
+                                ? Icons.remove_red_eye
+                                : Icons.visibility_off_rounded,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 15),
-                  Container(
-                    height: 40,
+                  ButtonAnimated(
                     width: constraints.maxWidth * 0.6,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: const Border.fromBorderSide(
-                        BorderSide(color: Colors.grey),
-                      ),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Entrar",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
+                    loginController: _loginController,
                   ),
                   const SizedBox(height: 10),
                   TextButton(
@@ -86,4 +95,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
 //: Icons.visibility_off,
