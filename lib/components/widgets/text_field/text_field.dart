@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextFiledCustom extends StatelessWidget {
+class TextFieldCustom extends StatelessWidget {
   final double? height;
   final void Function(String)? onChanged;
   final String? initialValue;
@@ -13,7 +13,7 @@ class TextFiledCustom extends StatelessWidget {
   final String? hintText;
   final Widget? prefixIcon;
 
-  const TextFiledCustom({
+  const TextFieldCustom({
     Key? key,
     this.height,
     this.onChanged,
