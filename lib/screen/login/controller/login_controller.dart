@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
+import '/repositories/user/user.dart';
 
 part 'login_controller.g.dart';
 
@@ -43,7 +44,9 @@ abstract class _LoginControllerBase with Store {
 
   //button
   @computed
-  Function? get loginPressed => emailValid && passwordValid ? _login : null;
+  dynamic get loginPressed => emailValid && passwordValid ? _login : null;
 
-  void _login() async {}
+  void _login() async {
+    await FirebaseUser().signIn(email: email!, password: password!);
+  }
 }

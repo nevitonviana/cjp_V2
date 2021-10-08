@@ -31,7 +31,7 @@ class ButtonAnimated extends StatelessWidget {
           ),
         ),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: loginController.loginPressed,
           child: const Text(
             "Entrar",
             style: TextStyle(color: Colors.black),

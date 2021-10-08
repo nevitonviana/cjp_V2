@@ -23,11 +23,11 @@ mixin _$LoginController on _LoginControllerBase, Store {
       (_$passwordValidComputed ??= Computed<bool>(() => super.passwordValid,
               name: '_LoginControllerBase.passwordValid'))
           .value;
-  Computed<Function?>? _$loginPressedComputed;
+  Computed<dynamic>? _$loginPressedComputed;
 
   @override
-  Function? get loginPressed =>
-      (_$loginPressedComputed ??= Computed<Function?>(() => super.loginPressed,
+  dynamic get loginPressed =>
+      (_$loginPressedComputed ??= Computed<dynamic>(() => super.loginPressed,
               name: '_LoginControllerBase.loginPressed'))
           .value;
 

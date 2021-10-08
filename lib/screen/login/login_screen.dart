@@ -1,3 +1,4 @@
+import 'package:cjp_v2/repositories/social_login/google/login_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -85,6 +86,12 @@ class LoginScreen extends StatelessWidget {
                       "Cadastrar-Se",
                       style: TextStyle(color: Colors.grey),
                     ),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      Google().signInWithGoogle();
+                    },
+                    child: const Text("google"),
                   ),
                 ],
               ),
