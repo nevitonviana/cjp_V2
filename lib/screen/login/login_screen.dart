@@ -1,4 +1,4 @@
-import 'package:cjp_v2/repositories/social_login/google/login_google.dart';
+import 'package:cjp_v2/repositories/social_login/facebook/login_facebook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   MaterialButton(
                     onPressed: () {
-                      Google().signInWithGoogle();
+                      Facebook().signInWithFacebook();
                     },
                     child: const Text("google"),
                   ),
