@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/widgets/widgets.dart';
-import '/repositories/social_login/social_login.dart';
 import 'controller/login_controller.dart';
 import 'widgets/widgets.dart';
 
@@ -105,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                           Expanded(
                             flex: 5,
                             child: ButtonSocial(
-                              onTap: () => Google().signInWithGoogle(),
+                              onTap: () => _loginController.signInGoogle(),
                               image: "assets/images/google.png",
                               nome: "Google",
                             ),
@@ -114,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                           Expanded(
                             flex: 6,
                             child: ButtonSocial(
-                              onTap: () => Facebook().signInWithFacebook(),
+                              onTap: () => _loginController.signInFacebook(),
                               image: "assets/images/facebook.png",
                               nome: "Facebook",
                             ),

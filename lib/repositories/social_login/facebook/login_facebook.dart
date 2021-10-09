@@ -4,7 +4,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import '/repositories/user/user.dart';
 
 class Facebook {
-  Future<UserCredential?> signInWithFacebook() async {
+  Future<UserCredential?> signIn() async {
     try {
       final LoginResult loginResult = await FacebookAuth.instance
           .login(permissions: ["public_profile", "email"]);
@@ -18,12 +18,12 @@ class Facebook {
         case LoginStatus.cancelled:
           return null;
         case LoginStatus.failed:
-          return Future.error("login error with facebook");
+          return Future.error("Error ao entrar com facebook");
         case LoginStatus.operationInProgress:
           break;
       }
     } catch (e) {
-      return Future.error("unexpected failure");
+      return Future.error(e);
     }
   }
 

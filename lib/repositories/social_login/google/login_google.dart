@@ -12,7 +12,7 @@ class Google {
   );
 
   //TODO credential
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signIn() async {
     try {
       final _user = await _googleUser.signIn();
 

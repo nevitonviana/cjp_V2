@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
+import '/repositories/social_login/social_login.dart';
 import '/repositories/user/user.dart';
 
 part 'login_controller.g.dart';
@@ -46,7 +47,37 @@ abstract class _LoginControllerBase with Store {
   @computed
   dynamic get loginPressed => emailValid && passwordValid ? _login : null;
 
-  void _login() async {
+  @action
+  Future<void> _login() async {
     await FirebaseUser().signIn(email: email!, password: password!);
+  }
+
+  //loading
+  @observable
+  bool loading = false;
+
+  @action
+  void setLoading(bool value) => loading = value;
+
+  //massage error
+  @observable
+  String? error;
+
+  @action
+  void setError(String value) => error = value;
+
+  //signInFacebook
+  Future signInFacebook() async {
+    final result = await Facebook().signIn();
+    if (result?.user != null) {
+    } else if (result == null) {
+    } else {}
+  }
+
+  //signInGoogle
+  Future signInGoogle() async {
+    final result = await Google().signIn();
+    if (result?.user != null) {
+    } else {}
   }
 }

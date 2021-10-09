@@ -31,9 +31,10 @@ class FirebaseUser {
   Future<UserCredential?> signInCredential(
       {required AuthCredential credential}) async {
     try {
-      _auth.signInWithCredential(credential);
+      return await _auth.signInWithCredential(credential);
     } catch (e) {
-      return null;
+      return Future.error(
+          "Já existe uma conta com o mesmo endereço de e-mail, mas com credenciais de login diferentes");
     }
   }
 }

@@ -77,6 +77,43 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_LoginControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$errorAtom = Atom(name: '_LoginControllerBase.error');
+
+  @override
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
+  final _$_loginAsyncAction = AsyncAction('_LoginControllerBase._login');
+
+  @override
+  Future<void> _login() {
+    return _$_loginAsyncAction.run(() => super._login());
+  }
+
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
 
@@ -114,11 +151,35 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setError(String value) {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.setError');
+    try {
+      return super.setError(value);
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
 password: ${password},
 visibilityPassword: ${visibilityPassword},
+loading: ${loading},
+error: ${error},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
 loginPressed: ${loginPressed}
