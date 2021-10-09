@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../controller/login_controller.dart';
+import '../../controller/login_controller.dart';
 
 class ButtonAnimated extends StatelessWidget {
   final LoginController loginController;

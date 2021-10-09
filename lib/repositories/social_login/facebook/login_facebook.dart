@@ -5,26 +5,33 @@ import '/repositories/user/user.dart';
 
 class Facebook {
   Future<UserCredential?> signInWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance
-        .login(permissions: ["public_profile", "email"]);
-    final userData = await FacebookAuth.instance.getUserData();
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.token);
-    switch (loginResult.status) {
-      case LoginStatus.operationInProgress:
-        break;
-      case LoginStatus.success:
-        FirebaseUser().signInCredential(credential: facebookAuthCredential);
-        break;
-      case LoginStatus.cancelled:
-        break;
-      case LoginStatus.failed:
-        break;
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance
+          .login(permissions: ["public_profile", "email"]);
+
+      switch (loginResult.status) {
+        case LoginStatus.success:
+          final OAuthCredential facebookAuthCredential =
+              FacebookAuthProvider.credential(loginResult.accessToken!.token);
+          return await FirebaseUser()
+              .signInCredential(credential: facebookAuthCredential);
+        case LoginStatus.cancelled:
+          return null;
+        case LoginStatus.failed:
+          return Future.error("login error with facebook");
+        case LoginStatus.operationInProgress:
+          break;
+      }
+    } catch (e) {
+      return Future.error("unexpected failure");
     }
-    return null;
   }
 
   Future<void> logOut() async {
     await FacebookAuth.i.logOut();
+  }
+
+  Future getInfoUser() async {
+    return await FacebookAuth.instance.getUserData();
   }
 }

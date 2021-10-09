@@ -1,10 +1,11 @@
-import 'package:cjp_v2/repositories/social_login/facebook/login_facebook.dart';
+import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/widgets/widgets.dart';
+import '/repositories/social_login/social_login.dart';
 import 'controller/login_controller.dart';
-import 'widgets/button_animated.dart';
+import 'widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -87,12 +88,41 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
-                  MaterialButton(
-                    onPressed: () {
-                      Facebook().signInWithFacebook();
-                    },
-                    child: const Text("google"),
+                  Divider(
+                    color: Colors.grey,
+                    endIndent: 70,
+                    indent: 70,
+                    thickness: 1,
+                    height: constraints.maxHeight * 0.07,
                   ),
+                  SizedBox(
+                    width: constraints.maxWidth * 0.70,
+                    child: AnimatedCard(
+                      duration: const Duration(seconds: 3),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: ButtonSocial(
+                              onTap: () => Google().signInWithGoogle(),
+                              image: "assets/images/google.png",
+                              nome: "Google",
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          Expanded(
+                            flex: 6,
+                            child: ButtonSocial(
+                              onTap: () => Facebook().signInWithFacebook(),
+                              image: "assets/images/facebook.png",
+                              nome: "Facebook",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
