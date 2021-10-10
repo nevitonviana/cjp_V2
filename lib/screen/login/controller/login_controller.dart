@@ -49,7 +49,11 @@ abstract class _LoginControllerBase with Store {
 
   @action
   Future<void> _login() async {
-    await FirebaseUser().signIn(email: email!, password: password!);
+    try {
+      await FirebaseUser().signIn(email: email!, password: password!);
+    } catch (e) {
+      setError(e.toString());
+    }
   }
 
   //loading
@@ -68,16 +72,27 @@ abstract class _LoginControllerBase with Store {
 
   //signInFacebook
   Future signInFacebook() async {
-    final result = await Facebook().signIn();
-    if (result?.user != null) {
-    } else if (result == null) {
-    } else {}
+    try {
+      final result = await Facebook().signIn();
+      if (result?.user != null) {
+      } else if (result == null) {
+        return null;
+      }
+    } catch (e) {
+      setError(e.toString());
+      await Facebook().logOut();
+      return;
+    }
   }
 
   //signInGoogle
   Future signInGoogle() async {
-    final result = await Google().signIn();
-    if (result?.user != null) {
-    } else {}
+    try {
+      final result = await Google().signIn();
+    } catch (e) {
+      setError(e.toString());
+      await Google().signOut();
+      return;
+    }
   }
 }

@@ -1,17 +1,37 @@
 import 'package:animated_card/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 import '/components/widgets/widgets.dart';
 import 'controller/login_controller.dart';
 import 'widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final LoginController _loginController = LoginController();
+
+  @override
+  void initState() {
+    super.initState();
+    autorun((_) {
+      if (_loginController.error != null) {
+        OpenDialog().error(
+          context: context,
+          loginController: _loginController,
+        );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final LoginController _loginController = LoginController();
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -104,7 +124,9 @@ class LoginScreen extends StatelessWidget {
                           Expanded(
                             flex: 5,
                             child: ButtonSocial(
-                              onTap: () => _loginController.signInGoogle(),
+                              onTap: () async {
+                                await _loginController.signInGoogle();
+                              },
                               image: "assets/images/google.png",
                               nome: "Google",
                             ),
@@ -113,7 +135,9 @@ class LoginScreen extends StatelessWidget {
                           Expanded(
                             flex: 6,
                             child: ButtonSocial(
-                              onTap: () => _loginController.signInFacebook(),
+                              onTap: () async {
+                                await _loginController.signInFacebook();
+                              },
                               image: "assets/images/facebook.png",
                               nome: "Facebook",
                             ),
@@ -121,7 +145,7 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -131,5 +155,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-//: Icons.visibility_off,

@@ -15,4 +15,5 @@ final ThemeData theme = ThemeData(
       backgroundColor: MaterialStateProperty.all(Colors.grey[400]),
     ),
   ),
+  dialogTheme: DialogTheme(backgroundColor: Colors.grey[300]),
 );
