@@ -53,7 +53,12 @@ abstract class _LoginControllerBase with Store {
   Future<void> _login() async {
     loading = true;
     try {
-      await FirebaseUser().signIn(email: email!, password: password!);
+      await FirebaseUser()
+          .signIn(email: email!, password: password!)
+          .then((value) async {
+        await SharedPreferencesUser()
+            .save(usuario: await FirebaseUser().getInfoUser());
+      });
     } catch (e) {
       setError(e.toString());
     }

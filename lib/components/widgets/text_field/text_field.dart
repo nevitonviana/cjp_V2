@@ -43,6 +43,7 @@ class TextFieldCustom extends StatelessWidget {
         style: const TextStyle(color: Colors.black),
         keyboardType: keyboardType,
         decoration: InputDecoration(
+          isDense: true,
           errorText: errorText,
           suffix: suffix,
           label: Text(label),

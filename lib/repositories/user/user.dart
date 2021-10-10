@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/model/user/user.dart';
@@ -5,6 +6,7 @@ import '../firebase_error.dart';
 
 class FirebaseUser {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> signIn({required String email, required String password}) async {
     try {
@@ -23,7 +25,20 @@ class FirebaseUser {
       _auth.createUserWithEmailAndPassword(
           email: user.email, password: user.password);
     } catch (e) {
-      return;
+      return Future.error(e);
+    }
+  }
+
+  Future<Usuario> getInfoUser() async {
+    try {
+      DocumentSnapshot snapshot = await _firestore
+          .collection('usuarios')
+          .doc(_auth.currentUser!.uid)
+          .get();
+      return Usuario.fromDocumentSnapshot(snapshot);
+    } catch (e) {
+      return Future.error(
+          "Não foi possível buscar suas informações no banco de dados");
     }
   }
 
