@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/widgets/widgets.dart';
+import 'controller/account_screen.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({Key? key}) : super(key: key);
@@ -10,6 +12,8 @@ class CreateAccountScreen extends StatefulWidget {
 }
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  final AccountController _accountController = AccountController();
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -36,64 +40,88 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const TextFieldCustom(
-                    label: "Nome Completo",
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const TextFieldCustom(
-                    label: "Bairro",
-                    prefixIcon: Icon(
-                      Icons.house_sharp,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const TextFieldCustom(
-                    label: "Cidade",
-                    prefixIcon: Icon(
-                      Icons.location_city_sharp,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const TextFieldCustom(
-                    label: "E-mail",
-                    prefixIcon: Icon(
-                      Icons.email_sharp,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const TextFieldCustom(
-                    label: "Senha",
-                    prefixIcon: Icon(
-                      Icons.password_sharp,
-                      color: Colors.black87,
-                    ),
-                    obscureText: true,
-                    // suffix: GestureDetector(
-                    //   child: Icon(
-                    //       ? Icons.remove_red_eye
-                    //       : Icons.visibility_off),
-                    //   onTap: () {
-                    //   },
-                    // ),
-                  ),
-                  const TextFieldCustom(
-                    label: "Repetir Senha",
-                    prefixIcon: Icon(
-                      Icons.password_sharp,
-                      color: Colors.black87,
-                    ),
-                    obscureText: true,
-                    // suffix: GestureDetector(
-                    //   child: Icon(
-                    //       ? Icons.remove_red_eye
-                    //       : Icons.visibility_off),
-                    //   onTap: () {
-                    //   },
-                    // ),
-                  ),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _accountController.setName,
+                      errorText: _accountController.nameError,
+                      label: "Nome Completo",
+                      prefixIcon: const Icon(
+                        Icons.person,
+                        color: Colors.black87,
+                      ),
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _accountController.setDistrict,
+                      errorText: _accountController.districtError,
+                      label: "Bairro",
+                      prefixIcon: const Icon(
+                        Icons.house_sharp,
+                        color: Colors.black87,
+                      ),
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _accountController.setCity,
+                      errorText: _accountController.cityError,
+                      label: "Cidade",
+                      prefixIcon: const Icon(
+                        Icons.location_city_sharp,
+                        color: Colors.black87,
+                      ),
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _accountController.setEmail,
+                      errorText: _accountController.errorEmail,
+                      label: "E-mail",
+                      prefixIcon: const Icon(
+                        Icons.email_sharp,
+                        color: Colors.black87,
+                      ),
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _accountController.setPassword,
+                      errorText: _accountController.passwordError,
+                      label: "Senha",
+                      prefixIcon: const Icon(
+                        Icons.password_sharp,
+                        color: Colors.black87,
+                      ),
+                      obscureText: _accountController.obscureText,
+                      suffix: GestureDetector(
+                        child: Icon(_accountController.obscureText
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off),
+                        onTap: () => _accountController
+                            .setObscureText(!_accountController.obscureText),
+                      ),
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return TextFieldCustom(
+                      onChanged: _accountController.setRepeatPassword,
+                      errorText: _accountController.repeatPasswordError,
+                      label: "Repetir Senha",
+                      prefixIcon: const Icon(
+                        Icons.password_sharp,
+                        color: Colors.black87,
+                      ),
+                      obscureText: _accountController.obscureText,
+                      suffix: GestureDetector(
+                        child: Icon(_accountController.obscureText
+                            ? Icons.remove_red_eye
+                            : Icons.visibility_off),
+                        onTap: () => _accountController
+                            .setObscureText(!_accountController.obscureText),
+                      ),
+                    );
+                  }),
                   SizedBox(
                     height: constraints.maxHeight * 0.05,
                   ),
