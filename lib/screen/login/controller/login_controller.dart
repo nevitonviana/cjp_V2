@@ -1,6 +1,8 @@
+import 'package:cjp_v2/model/user/user.dart';
 import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
+import '/components/shared_preferences_user/shared_preferences_user.dart';
 import '/repositories/social_login/social_login.dart';
 import '/repositories/user/user.dart';
 
@@ -72,11 +74,15 @@ abstract class _LoginControllerBase with Store {
 
   //signInFacebook
   Future signInFacebook() async {
+    Usuario usuario = Usuario();
     try {
       final result = await Facebook().signIn();
       if (result?.user != null) {
-      } else if (result == null) {
-        return null;
+        usuario.email = result!.user!.email!;
+        usuario.name = result.user!.displayName!;
+        usuario.photoUrl = result.user!.photoURL!;
+        usuario.isLogin = "facebook";
+        await SharedPreferencesUser().save(usuario: usuario);
       }
     } catch (e) {
       setError(e.toString());
@@ -87,8 +93,14 @@ abstract class _LoginControllerBase with Store {
 
   //signInGoogle
   Future signInGoogle() async {
+    Usuario usuario = Usuario();
     try {
       final result = await Google().signIn();
+      usuario.email = result!.user!.email!;
+      usuario.name = result.user!.displayName!;
+      usuario.photoUrl = result.user!.photoURL!;
+      usuario.isLogin = "google";
+      await SharedPreferencesUser().save(usuario: usuario);
     } catch (e) {
       setError(e.toString());
       await Google().signOut();
@@ -96,3 +108,4 @@ abstract class _LoginControllerBase with Store {
     }
   }
 }
+// Usuario s = await SharedPreferencesUser().getInfoSharedUser();
