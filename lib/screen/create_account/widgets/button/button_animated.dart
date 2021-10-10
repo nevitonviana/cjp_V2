@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../controller/account_screen.dart';
+import '../../controller/account_controller.dart';
 
 class ButtonAnimated extends StatelessWidget {
   final AccountController accountController;

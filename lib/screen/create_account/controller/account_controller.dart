@@ -2,7 +2,7 @@ import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
 
-part 'account_screen.g.dart';
+part 'account_controller.g.dart';
 
 class AccountController = _AccountControllerBase with _$AccountController;
 

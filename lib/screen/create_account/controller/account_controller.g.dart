@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_screen.dart';
+part of 'account_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
