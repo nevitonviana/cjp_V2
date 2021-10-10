@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
+import '/components/shared_preferences_user/shared_preferences_user.dart';
 import '/model/user/user.dart';
 import '/repositories/user/user.dart';
 
@@ -167,7 +168,8 @@ abstract class _AccountControllerBase with Store {
       await FirebaseUser()
           .createUser(email: email!, password: password!)
           .then((value) async {
-        Usuario? a = await FirebaseUser().saveInfoUser(usuario: _usuario);
+        Usuario? _result = await FirebaseUser().saveInfoUser(usuario: _usuario);
+        await SharedPreferencesUser().save(usuario: _result!);
       });
     } catch (e) {
       setErrorMessage(e.toString());

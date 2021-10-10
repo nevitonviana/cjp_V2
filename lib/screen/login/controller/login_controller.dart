@@ -115,4 +115,3 @@ abstract class _LoginControllerBase with Store {
     }
   }
 }
-// Usuario s = await SharedPreferencesUser().getInfoSharedUser();

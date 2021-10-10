@@ -1,4 +1,5 @@
 import 'package:animated_card/animated_card.dart';
+import 'package:cjp_v2/route_generate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -101,7 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 10),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(RouteGenerate.routeAccount),
                     child: const Text(
                       "Cadastrar-Se",
                       style: TextStyle(color: Colors.grey),
