@@ -1,4 +1,4 @@
-import 'package:cjp_v2/screen/login/login_screen.dart';
+import 'package:cjp_v2/screen/screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CJP',
       theme: theme,
-      home: const LoginScreen(),
+      home: const CreateAccountScreen(),
     );
   }
 }
