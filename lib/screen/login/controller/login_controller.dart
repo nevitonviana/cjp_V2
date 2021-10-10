@@ -51,11 +51,13 @@ abstract class _LoginControllerBase with Store {
 
   @action
   Future<void> _login() async {
+    loading = true;
     try {
       await FirebaseUser().signIn(email: email!, password: password!);
     } catch (e) {
       setError(e.toString());
     }
+    loading = false;
   }
 
   //loading
