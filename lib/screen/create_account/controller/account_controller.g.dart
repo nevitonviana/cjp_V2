@@ -51,6 +51,13 @@ mixin _$AccountController on _AccountControllerBase, Store {
           Computed<bool>(() => super.repeatPasswordValid,
               name: '_AccountControllerBase.repeatPasswordValid'))
       .value;
+  Computed<dynamic>? _$loginPressedComputed;
+
+  @override
+  dynamic get loginPressed =>
+      (_$loginPressedComputed ??= Computed<dynamic>(() => super.loginPressed,
+              name: '_AccountControllerBase.loginPressed'))
+          .value;
 
   final _$nameAtom = Atom(name: '_AccountControllerBase.name');
 
@@ -158,6 +165,44 @@ mixin _$AccountController on _AccountControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_AccountControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$errorMessageAtom = Atom(name: '_AccountControllerBase.errorMessage');
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
+  final _$_createAccountAsyncAction =
+      AsyncAction('_AccountControllerBase._createAccount');
+
+  @override
+  Future<void> _createAccount() {
+    return _$_createAccountAsyncAction.run(() => super._createAccount());
+  }
+
   final _$_AccountControllerBaseActionController =
       ActionController(name: '_AccountControllerBase');
 
@@ -239,6 +284,28 @@ mixin _$AccountController on _AccountControllerBase, Store {
   }
 
   @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_AccountControllerBaseActionController.startAction(
+        name: '_AccountControllerBase.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_AccountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setErrorMessage(String value) {
+    final _$actionInfo = _$_AccountControllerBaseActionController.startAction(
+        name: '_AccountControllerBase.setErrorMessage');
+    try {
+      return super.setErrorMessage(value);
+    } finally {
+      _$_AccountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 name: ${name},
@@ -248,12 +315,15 @@ email: ${email},
 password: ${password},
 repeatPassword: ${repeatPassword},
 obscureText: ${obscureText},
+loading: ${loading},
+errorMessage: ${errorMessage},
 nameValid: ${nameValid},
 districtValid: ${districtValid},
 cityValid: ${cityValid},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
-repeatPasswordValid: ${repeatPasswordValid}
+repeatPasswordValid: ${repeatPasswordValid},
+loginPressed: ${loginPressed}
     ''';
   }
 }

@@ -20,12 +20,38 @@ class FirebaseUser {
     await _auth.signOut();
   }
 
-  Future<void> createUser({required Usuario user}) async {
+  Future<void> createUser(
+      {required String email, required String password}) async {
     try {
-      _auth.createUserWithEmailAndPassword(
-          email: user.email, password: user.password);
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
     } catch (e) {
-      return Future.error(e);
+      return Future.error(FirebaseError.getDescription(e.hashCode).toString());
+    }
+  }
+
+  //TODO credential
+  Future<UserCredential?> signInCredential(
+      {required AuthCredential credential}) async {
+    try {
+      return await _auth.signInWithCredential(credential);
+    } catch (e) {
+      return Future.error(
+          "Já existe uma conta com o mesmo endereço de e-mail, mas com credenciais de login diferentes");
+    }
+  }
+
+  Future<Usuario?> saveInfoUser({required Usuario usuario}) async {
+    usuario.id = _auth.currentUser!.uid;
+    try {
+      await _firestore
+          .collection('usuarios')
+          .doc(usuario.id)
+          .set(usuario.toMap());
+      return usuario;
+    } catch (e) {
+      return Future.error(
+          "Não foi possível salva suas informações no banco de dados");
     }
   }
 
@@ -39,17 +65,6 @@ class FirebaseUser {
     } catch (e) {
       return Future.error(
           "Não foi possível buscar suas informações no banco de dados");
-    }
-  }
-
-  //TODO credential
-  Future<UserCredential?> signInCredential(
-      {required AuthCredential credential}) async {
-    try {
-      return await _auth.signInWithCredential(credential);
-    } catch (e) {
-      return Future.error(
-          "Já existe uma conta com o mesmo endereço de e-mail, mas com credenciais de login diferentes");
     }
   }
 }

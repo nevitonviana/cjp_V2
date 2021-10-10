@@ -10,7 +10,6 @@ class Usuario {
   String isLogin = "";
   String photoReference = "";
   String email = "";
-  String password = "";
 
   Usuario({
     this.id = "",
@@ -22,7 +21,6 @@ class Usuario {
     this.admin = false,
     this.photoReference = "",
     this.email = "",
-    this.password = "",
   });
 
   Map<String, dynamic> toMap() {

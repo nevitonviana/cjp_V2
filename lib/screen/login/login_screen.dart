@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_loginController.error != null) {
         OpenDialog().error(
           context: context,
-          loginController: _loginController,
+          error: _loginController.error!,
         );
       }
     });

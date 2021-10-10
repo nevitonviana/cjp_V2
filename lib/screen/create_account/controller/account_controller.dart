@@ -1,6 +1,8 @@
 import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
+import '/model/user/user.dart';
+import '/repositories/user/user.dart';
 
 part 'account_controller.g.dart';
 
@@ -9,7 +11,7 @@ class AccountController = _AccountControllerBase with _$AccountController;
 abstract class _AccountControllerBase with Store {
   final _field = 'Este campo é obrigatório';
 
-  //name
+  ///name
   @observable
   String? name;
 
@@ -29,7 +31,7 @@ abstract class _AccountControllerBase with Store {
     }
   }
 
-  //district
+  ///district
   @observable
   String? district;
 
@@ -49,7 +51,7 @@ abstract class _AccountControllerBase with Store {
     }
   }
 
-  //city
+  ///city
   @observable
   String? city;
 
@@ -69,7 +71,7 @@ abstract class _AccountControllerBase with Store {
     }
   }
 
-  //email
+  ///email
   @observable
   String? email;
 
@@ -82,7 +84,7 @@ abstract class _AccountControllerBase with Store {
   String? get errorEmail =>
       email == null || emailValid ? null : "E-mail invalido";
 
-  //password
+  ///password
   @observable
   String? password;
 
@@ -102,7 +104,7 @@ abstract class _AccountControllerBase with Store {
     }
   }
 
-  //repastPassword
+  ///repastPassword
   @observable
   String? repeatPassword;
 
@@ -121,9 +123,55 @@ abstract class _AccountControllerBase with Store {
     }
   }
 
+  ///obscureText
   @observable
   bool obscureText = true;
 
   @action
   void setObscureText(bool value) => obscureText = value;
+
+  ///loading
+  @observable
+  bool loading = false;
+
+  @action
+  void setLoading(bool value) => loading = value;
+
+  ///button
+  @computed
+  dynamic get loginPressed => emailValid &&
+          passwordValid &&
+          nameValid &&
+          cityValid &&
+          districtValid &&
+          repeatPasswordValid
+      ? _createAccount
+      : null;
+
+  @observable
+  String? errorMessage;
+
+  @action
+  void setErrorMessage(String value) => errorMessage = value;
+
+  @action
+  Future<void> _createAccount() async {
+    Usuario _usuario = Usuario(
+      name: name!,
+      district: district!,
+      city: city!,
+      isLogin: "firebase",
+      email: email!,
+    );
+    try {
+      await FirebaseUser()
+          .createUser(email: email!, password: password!)
+          .then((value) async {
+        Usuario? a = await FirebaseUser().saveInfoUser(usuario: _usuario);
+      });
+    } catch (e) {
+      setErrorMessage(e.toString());
+      return;
+    }
+  }
 }

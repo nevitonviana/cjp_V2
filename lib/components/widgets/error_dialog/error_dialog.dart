@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/screen/login/controller/login_controller.dart';
-
 class OpenDialog {
-  error(
-      {required BuildContext context,
-      required LoginController loginController}) async {
+  error({required BuildContext context, required String error}) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -27,7 +23,7 @@ class OpenDialog {
                 alignment: Alignment.center,
                 height: 90,
                 child: Text(
-                  loginController.error!,
+                  error,
                   textAlign: TextAlign.center,
                 ),
               ),

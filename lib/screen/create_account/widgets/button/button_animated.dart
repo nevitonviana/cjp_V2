@@ -17,7 +17,7 @@ class ButtonAnimated extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return AnimatedContainer(
-        curve: Curves.easeInCirc,
+        curve: Curves.fastOutSlowIn,
         duration: const Duration(milliseconds: 600),
         constraints: BoxConstraints.loose(
           Size(width, 40),
@@ -37,7 +37,7 @@ class ButtonAnimated extends StatelessWidget {
                   color: Colors.blue,
                 )
               : const Text(
-                  "Entrar",
+                  "Cadastrar-se",
                   style: TextStyle(color: Colors.black),
                 ),
         ),
