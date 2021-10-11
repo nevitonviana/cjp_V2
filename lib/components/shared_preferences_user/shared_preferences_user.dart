@@ -7,24 +7,32 @@ import '/model/user/user.dart';
 class SharedPreferencesUser {
   preferences() async {}
 
-  save({required Usuario usuario}) async {
+  Future<void> save({required Usuario usuario}) async {
     final _preferences = await SharedPreferences.getInstance();
     try {
       await _preferences.setString("user", jsonEncode(usuario.toMap()));
     } catch (e) {
-      return;
+      return Future.error("Erro ao salva seus dados no seu dispositivo ");
     }
   }
 
-  getInfoSharedUser() async {
-    final _preferences = await SharedPreferences.getInstance();
-    final json = await jsonDecode(_preferences.get("user").toString());
-    return Usuario.fromMap(json);
+  Future<Usuario> getInfoSharedUser() async {
+    try {
+      final _preferences = await SharedPreferences.getInstance();
+      final json = await jsonDecode(_preferences.get("user").toString());
+      return Usuario.fromMap(json);
+    } catch (e) {
+      return Future.error("Erro ao busca suas informações");
+    }
   }
 
-  remove() async {
-    final _preferences = await SharedPreferences.getInstance();
-    _preferences.remove("user");
-    _preferences.clear();
+  Future<void> remove() async {
+    try {
+      final _preferences = await SharedPreferences.getInstance();
+      _preferences.remove("user");
+      _preferences.clear();
+    } catch (e) {
+      return Future.error("Erro ao remove suas informações ");
+    }
   }
 }

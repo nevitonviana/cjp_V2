@@ -77,6 +77,22 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$loginConfirmedAtom =
+      Atom(name: '_LoginControllerBase.loginConfirmed');
+
+  @override
+  bool get loginConfirmed {
+    _$loginConfirmedAtom.reportRead();
+    return super.loginConfirmed;
+  }
+
+  @override
+  set loginConfirmed(bool value) {
+    _$loginConfirmedAtom.reportWrite(value, super.loginConfirmed, () {
+      super.loginConfirmed = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_LoginControllerBase.loading');
 
   @override
@@ -151,6 +167,17 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
+  void setLoginConfirmed(bool value) {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.setLoginConfirmed');
+    try {
+      return super.setLoginConfirmed(value);
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setLoading(bool value) {
     final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
         name: '_LoginControllerBase.setLoading');
@@ -178,6 +205,7 @@ mixin _$LoginController on _LoginControllerBase, Store {
 email: ${email},
 password: ${password},
 visibilityPassword: ${visibilityPassword},
+loginConfirmed: ${loginConfirmed},
 loading: ${loading},
 error: ${error},
 emailValid: ${emailValid},

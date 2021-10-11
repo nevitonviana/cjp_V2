@@ -29,6 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       }
     });
+    when((_) => _loginController.loginConfirmed, () {
+      Navigator.pushNamedAndRemoveUntil(
+          context, RouteGenerate.routeHome, (route) => false);
+    });
   }
 
   @override

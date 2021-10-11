@@ -16,4 +16,6 @@ final ThemeData theme = ThemeData(
     ),
   ),
   dialogTheme: DialogTheme(backgroundColor: Colors.grey[300]),
+  appBarTheme:
+      AppBarTheme(backgroundColor: Colors.grey[500], centerTitle: true),
 );

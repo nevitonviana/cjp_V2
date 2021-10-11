@@ -5,18 +5,22 @@ import '/screen/screen.dart';
 class RouteGenerate {
   static const String routeLogin = "/";
   static const String routeAccount = "/account";
+  static const String routeHome = "/home";
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     dynamic args = settings.arguments;
     switch (settings.name) {
-      case "/":
+      case "/home":
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         );
-
       case "/account":
         return MaterialPageRoute(
           builder: (context) => const CreateAccountScreen(),
+        );
+      case "/":
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
         );
 
       default:

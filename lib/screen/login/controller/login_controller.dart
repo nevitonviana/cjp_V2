@@ -45,6 +45,13 @@ abstract class _LoginControllerBase with Store {
   @action
   void setVisibilityPassword(bool value) => visibilityPassword = value;
 
+  //login confirmed
+  @observable
+  bool loginConfirmed = false;
+
+  @action
+  void setLoginConfirmed(bool value) => loginConfirmed = value;
+
   //button
   @computed
   dynamic get loginPressed => emailValid && passwordValid ? _login : null;
@@ -54,11 +61,12 @@ abstract class _LoginControllerBase with Store {
     loading = true;
     try {
       await FirebaseUser()
-          .signIn(email: email!, password: password!)
+          .signIn(email: email!.trim(), password: password!.trim())
           .then((value) async {
         await SharedPreferencesUser()
             .save(usuario: await FirebaseUser().getInfoUser());
       });
+      setLoginConfirmed(true);
     } catch (e) {
       setError(e.toString());
     }
@@ -90,6 +98,7 @@ abstract class _LoginControllerBase with Store {
         usuario.photoUrl = result.user!.photoURL!;
         usuario.isLogin = "facebook";
         await SharedPreferencesUser().save(usuario: usuario);
+        setLoginConfirmed(true);
       }
     } catch (e) {
       setError(e.toString());
@@ -108,6 +117,7 @@ abstract class _LoginControllerBase with Store {
       usuario.photoUrl = result.user!.photoURL!;
       usuario.isLogin = "google";
       await SharedPreferencesUser().save(usuario: usuario);
+      setLoginConfirmed(true);
     } catch (e) {
       setError(e.toString());
       await Google().signOut();
