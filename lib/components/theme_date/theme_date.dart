@@ -18,4 +18,20 @@ final ThemeData theme = ThemeData(
   dialogTheme: DialogTheme(backgroundColor: Colors.grey[300]),
   appBarTheme:
       AppBarTheme(backgroundColor: Colors.grey[500], centerTitle: true),
+  // colorScheme: ColorScheme(
+  //   primary: Colors.grey[300]!,
+  //   primaryVariant: Colors.red,
+  //   secondary: Colors.blueGrey,
+  //   secondaryVariant: Colors.red,
+  //   surface: Colors.red,
+  //   background: Colors.grey,
+  //   error: Colors.red,
+  //   onPrimary: Colors.white,
+  //   onSecondary: Colors.red,
+  //   onSurface: Colors.red,
+  //   onBackground: Colors.red,
+  //   onError: Colors.red,
+  //   brightness: Brightness.light,
+  // ),
+  primaryColor: Colors.grey,
 );
