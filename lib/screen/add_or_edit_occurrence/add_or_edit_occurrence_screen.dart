@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import 'components/widgets/show_selected_image.dart';
-import 'controller/add_or_edit.dart';
+import 'controller/add_or_edit_controller.dart';
 
 class AddOrEditOccurrence extends StatefulWidget {
   const AddOrEditOccurrence({Key? key}) : super(key: key);
@@ -115,6 +115,19 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                       color: Colors.transparent,
                       height: constraints.maxHeight * 0.04,
                     ),
+                    Observer(builder: (_) {
+                      return _addOrEditController.imageError != null
+                          ? Container(
+                              margin: EdgeInsets.only(
+                                  bottom: constraints.maxHeight * 0.03),
+                              child: Text(
+                                _addOrEditController.imageError!,
+                                style: const TextStyle(
+                                    color: Colors.red, fontSize: 15),
+                              ),
+                            )
+                          : Container();
+                    }),
                     InkWell(
                       onTap: _addOrEditController.invalidSendPressed,
                       child: Observer(builder: (_) {

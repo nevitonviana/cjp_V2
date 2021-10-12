@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_or_edit.dart';
+part of 'add_or_edit_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -9,6 +9,13 @@ part of 'add_or_edit.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
+  Computed<bool>? _$imageValidComputed;
+
+  @override
+  bool get imageValid =>
+      (_$imageValidComputed ??= Computed<bool>(() => super.imageValid,
+              name: '_AddOrEditControllerBase.imageValid'))
+          .value;
   Computed<bool>? _$cityValidComputed;
 
   @override
@@ -143,6 +150,22 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
     });
   }
 
+  final _$getImageGalleryAsyncAction =
+      AsyncAction('_AddOrEditControllerBase.getImageGallery');
+
+  @override
+  Future<void> getImageGallery() {
+    return _$getImageGalleryAsyncAction.run(() => super.getImageGallery());
+  }
+
+  final _$getImageCameraAsyncAction =
+      AsyncAction('_AddOrEditControllerBase.getImageCamera');
+
+  @override
+  Future<void> getImageCamera() {
+    return _$getImageCameraAsyncAction.run(() => super.getImageCamera());
+  }
+
   final _$_addOrEditOccurrenceAsyncAction =
       AsyncAction('_AddOrEditControllerBase._addOrEditOccurrence');
 
@@ -230,6 +253,7 @@ road: ${road},
 nameOccurrence: ${nameOccurrence},
 discretion: ${discretion},
 showErrors: ${showErrors},
+imageValid: ${imageValid},
 cityValid: ${cityValid},
 districtValid: ${districtValid},
 roadValid: ${roadValid},

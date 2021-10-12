@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/widgets/widgets.dart';
-import '../../controller/add_or_edit.dart';
+import '../../controller/add_or_edit_controller.dart';
 
 class ShowSelectedImage extends StatelessWidget {
   final AddOrEditController addOrEditController;

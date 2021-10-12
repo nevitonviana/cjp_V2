@@ -3,13 +3,24 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
-part 'add_or_edit.g.dart';
+part 'add_or_edit_controller.g.dart';
 
 class AddOrEditController = _AddOrEditControllerBase with _$AddOrEditController;
 
 abstract class _AddOrEditControllerBase with Store {
   /// field listImage
   ObservableList listImage = ObservableList();
+
+  @computed
+  bool get imageValid => listImage.isNotEmpty;
+
+  String? get imageError {
+    if (!showErrors || imageValid) {
+      return null;
+    } else {
+      return "[necessário inserir imagem]";
+    }
+  }
 
   /// field city
   @observable

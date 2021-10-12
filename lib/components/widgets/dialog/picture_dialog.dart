@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '/screen/add_or_edit_occurrence/controller/add_or_edit.dart';
+import '/screen/add_or_edit_occurrence/controller/add_or_edit_controller.dart';
 
 class PictureDialog {
   fullPicture({
