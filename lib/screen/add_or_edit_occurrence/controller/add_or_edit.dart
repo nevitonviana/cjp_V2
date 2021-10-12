@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 part 'add_or_edit.g.dart';
@@ -115,6 +118,28 @@ abstract class _AddOrEditControllerBase with Store {
 
   @action
   void invalidSendPressed() => showErrors = true;
+
+  @action
+  Future<void> getImageGallery() async {
+    final ImagePicker _picker = ImagePicker();
+    try {
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      listImage.add(File(image!.path));
+    } catch (e) {
+      return;
+    }
+  }
+
+  @action
+  Future<void> getImageCamera() async {
+    final ImagePicker _picker = ImagePicker();
+    try {
+      final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+      listImage.add(File(photo!.path));
+    } catch (e) {
+      return;
+    }
+  }
 
   ///button
   @computed

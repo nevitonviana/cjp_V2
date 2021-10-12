@@ -1,7 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
+import '/screen/add_or_edit_occurrence/controller/add_or_edit.dart';
+
 class PictureDialog {
-  fullPicture({required BuildContext context}) {
+  fullPicture({
+    required BuildContext context,
+    required File image,
+    AddOrEditController? addOrEditController,
+  }) {
     showDialog(
       context: context,
       builder: (context) => Dialog(
@@ -12,8 +20,10 @@ class PictureDialog {
             Stack(
               children: [
                 Positioned.fill(
-                  child: Image.network(
-                      "https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9jdXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"),
+                  child: Image.file(
+                    File(image.path),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const Align(
                   child: CloseButton(color: Colors.white),
@@ -24,20 +34,9 @@ class PictureDialog {
             Visibility(
               child: TextButton(
                 onPressed: () {
-                  // setState(
-                  //   () {
-                  //     widget.ocorrencia ==
-                  //             null
-                  //         ? _listDeImages
-                  //             .removeAt(
-                  //                 index)
-                  //         : _listDeUrl
-                  //             .removeAt(
-                  //                 index);
-                  //     Navigator.pop(
-                  //         context);
-                  //   },
-                  // );
+                  addOrEditController!.listImage
+                      .removeWhere((element) => element == image);
+                  Navigator.pop(context);
                 },
                 child: const Text("Excluir"),
                 style: ButtonStyle(

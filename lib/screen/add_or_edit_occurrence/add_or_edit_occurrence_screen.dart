@@ -1,10 +1,10 @@
-import 'package:cjp_v2/screen/add_or_edit_occurrence/controller/add_or_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import 'components/widgets/show_selected_image.dart';
+import 'controller/add_or_edit.dart';
 
 class AddOrEditOccurrence extends StatefulWidget {
   const AddOrEditOccurrence({Key? key}) : super(key: key);
@@ -44,7 +44,8 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 OutlinedButton.icon(
-                                  onPressed: () {},
+                                  onPressed:
+                                      _addOrEditController.getImageGallery,
                                   icon: const Icon(
                                     Icons.add_photo_alternate_rounded,
                                     color: Colors.black,
@@ -55,7 +56,8 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                                   ),
                                 ),
                                 OutlinedButton.icon(
-                                  onPressed: () {},
+                                  onPressed:
+                                      _addOrEditController.getImageCamera,
                                   icon: const Icon(
                                     Icons.add_a_photo_sharp,
                                     color: Colors.black,
@@ -68,7 +70,9 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                               ],
                             ),
                           ),
-                          const ShowSelectedImage(),
+                          ShowSelectedImage(
+                            addOrEditController: _addOrEditController,
+                          ),
                         ],
                       ),
                     ),
