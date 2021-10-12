@@ -1,4 +1,3 @@
-import 'package:cjp_v2/screen/create_account/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -143,7 +142,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       height: constraints.maxHeight * 0.05,
                     ),
                     ButtonAnimated(
-                        accountController: _accountController,
+                        controller: _accountController,
                         width: constraints.maxWidth * 0.5),
                   ],
                 ),

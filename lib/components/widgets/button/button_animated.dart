@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../controller/login_controller.dart';
-
 class ButtonAnimated extends StatelessWidget {
-  final LoginController loginController;
+  dynamic controller;
   final double width;
 
-  const ButtonAnimated({
+  ButtonAnimated({
     Key? key,
-    required this.loginController,
+    required this.controller,
     required this.width,
   }) : super(key: key);
 
@@ -22,7 +20,7 @@ class ButtonAnimated extends StatelessWidget {
         constraints: BoxConstraints.loose(
           Size(width, 40),
         ),
-        height: loginController.loginPressed == null ? 0 : 40,
+        height: controller.loginPressed == null ? 0 : 40,
         width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -31,8 +29,8 @@ class ButtonAnimated extends StatelessWidget {
           ),
         ),
         child: ElevatedButton(
-          onPressed: loginController.loginPressed,
-          child: loginController.loading
+          onPressed: controller.loginPressed,
+          child: controller.loading
               ? const CircularProgressIndicator(
                   color: Colors.blue,
                 )

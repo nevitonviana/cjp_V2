@@ -5,7 +5,8 @@ class TextFieldCustom extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? initialValue;
   final bool obscureText;
-  final int maxLines;
+  final int? maxLines;
+  final int? minLines;
   final TextInputType keyboardType;
   final String? errorText;
   final Widget? suffix;
@@ -26,6 +27,7 @@ class TextFieldCustom extends StatelessWidget {
     required this.label,
     this.hintText,
     this.prefixIcon,
+    this.minLines,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class TextFieldCustom extends StatelessWidget {
         initialValue: initialValue,
         obscureText: obscureText,
         maxLines: maxLines,
+        minLines: minLines,
         style: const TextStyle(color: Colors.black),
         keyboardType: keyboardType,
         decoration: InputDecoration(

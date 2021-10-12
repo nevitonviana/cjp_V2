@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import '/components/theme_date/theme_date.dart';
+import 'components/theme/thema/theme_date.dart';
 import 'route_generate.dart';
 
 Future<void> main() async {

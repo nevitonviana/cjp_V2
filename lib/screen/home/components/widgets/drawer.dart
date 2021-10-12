@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../route_generate.dart';
 import 'drawer_header_custom.dart';
 import 'menu_button_custom.dart';
 
@@ -17,15 +18,15 @@ class CustomDrawer extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(bottom: 20),
           child: Column(
-            children: const [
-              DrawerHeaderCustom(),
+            children: [
+              const DrawerHeaderCustom(),
               MenuButtonCustom(
-                // onTap: () => Navigator.pushNamed(
-                //     context, RouteGenerate.route_adicionarOcorrencia),
+                onTap: () => Navigator.pushNamed(
+                    context, RouteGenerate.routeAddOccurrence),
                 text: "Adicionar Ocorrencia",
                 icons: Icons.note_alt_outlined,
               ),
-              MenuButtonCustom(
+              const MenuButtonCustom(
                 text: "Minhas Ocorrencias",
                 icons: Icons.list_alt_rounded,
                 // onTap: () => Navigator.pushNamed(
@@ -33,19 +34,19 @@ class CustomDrawer extends StatelessWidget {
                 //   RouteGenerate.route_Minhas_Ocorrencias,
                 // ),
               ),
-              MenuButtonCustom(
+              const MenuButtonCustom(
                 text: "Pefil",
                 icons: Icons.person,
                 // onTap: () =>
                 //     Navigator.pushNamed(context, RouteGenerate.route_Perfil),
               ),
-              MenuButtonCustom(
+              const MenuButtonCustom(
                 text: "FeedBack",
                 icons: Icons.feedback_outlined,
                 // onTap: () =>
                 //     Navigator.pushNamed(context, RouteGenerate.route_FeedBack),
               ),
-              MenuButtonCustom(
+              const MenuButtonCustom(
                 // onTap: () => _signOut(),
                 text: "Sair",
                 icons: Icons.exit_to_app_outlined,
