@@ -10,18 +10,18 @@ abstract class _AddOrEditControllerBase with Store {
 
   /// field city
   @observable
-  String? city;
+  String city = "";
 
   @action
   void setCity(String value) => city = value;
 
   @computed
-  bool get cityValid => city != null && city!.length >= 3;
+  bool get cityValid => city.length >= 3;
 
   String? get nameError {
-    if (city == null || cityValid) {
+    if (!showErrors || cityValid) {
       return null;
-    } else if (city!.isEmpty) {
+    } else if (city.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Nome muito curto';
@@ -30,18 +30,18 @@ abstract class _AddOrEditControllerBase with Store {
 
   ///field district
   @observable
-  String? district;
+  String district = "";
 
   @action
   void setDistrict(String value) => district = value;
 
   @computed
-  bool get districtValid => district != null && district!.length >= 3;
+  bool get districtValid => district.length >= 3;
 
   String? get districtError {
-    if (district == null || districtValid) {
+    if (!showErrors || districtValid) {
       return null;
-    } else if (district!.isEmpty) {
+    } else if (district.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Nome muito curto';
@@ -50,18 +50,18 @@ abstract class _AddOrEditControllerBase with Store {
 
   ///field road
   @observable
-  String? road;
+  String road = "";
 
   @action
   void setRoad(String value) => road = value;
 
   @computed
-  bool get roadValid => road != null && road!.length >= 3;
+  bool get roadValid => road.length >= 3;
 
   String? get roadError {
-    if (road == null || roadValid) {
+    if (!showErrors || roadValid) {
       return null;
-    } else if (road!.isEmpty) {
+    } else if (road.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Nome muito curto';
@@ -70,19 +70,18 @@ abstract class _AddOrEditControllerBase with Store {
 
   ///field name Occurrence
   @observable
-  String? nameOccurrence;
+  String nameOccurrence = "";
 
   @action
   void setNameOccurrence(String value) => nameOccurrence = value;
 
   @computed
-  bool get nameOccurrenceValid =>
-      nameOccurrence != null && nameOccurrence!.length >= 3;
+  bool get nameOccurrenceValid => nameOccurrence.length >= 3;
 
   String? get nameOccurrenceError {
-    if (nameOccurrence == null || nameOccurrenceValid) {
+    if (!showErrors || nameOccurrenceValid) {
       return null;
-    } else if (nameOccurrence!.isEmpty) {
+    } else if (nameOccurrence.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Nome muito curto';
@@ -92,27 +91,34 @@ abstract class _AddOrEditControllerBase with Store {
   ///field discretion
 
   @observable
-  String? discretion;
+  String discretion = "";
 
   @action
   void setDiscretion(String value) => discretion = value;
 
   @computed
-  bool get discretionValid => discretion != null && discretion!.length >= 3;
+  bool get discretionValid => discretion.length >= 10;
 
   String? get discretionError {
-    if (discretion == null || discretionValid) {
+    if (!showErrors || discretionValid) {
       return null;
-    } else if (discretion!.isEmpty) {
+    } else if (discretion.isEmpty) {
       return 'Campo obrigatório';
     } else {
-      return 'Nome muito curto';
+      return 'Descrição muito curta';
     }
   }
 
+  ///invalidSendPressed
+  @observable
+  bool showErrors = false;
+
+  @action
+  void invalidSendPressed() => showErrors = true;
+
   ///button
   @computed
-  dynamic get loginPressed => districtValid ? _addOrEditOccurrence : null;
+  dynamic get loginPressed => discretionValid ? _addOrEditOccurrence : null;
 
   @action
   Future<void> _addOrEditOccurrence() async {}

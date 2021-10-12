@@ -1,5 +1,6 @@
 import 'package:cjp_v2/screen/add_or_edit_occurrence/controller/add_or_edit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
@@ -73,38 +74,62 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                     ),
                     Column(
                       children: [
-                        TextFieldCustom(
-                          onChanged: _addOrEditController.setDistrict,
-                          errorText: _addOrEditController.discretionError,
-                          label: "Bairro",
-                        ),
-                        TextFieldCustom(
-                          onChanged: _addOrEditController.setRoad,
-                          errorText: _addOrEditController.roadError,
-                          label: "Av/Rua",
-                        ),
-                        TextFieldCustom(
-                          onChanged: _addOrEditController.setNameOccurrence,
-                          errorText: _addOrEditController.nameOccurrenceError,
-                          label: "Nome da Ocorrencia",
-                        ),
-                        TextFieldCustom(
-                          onChanged: _addOrEditController.setDistrict,
-                          errorText: _addOrEditController.discretionError,
-                          label: "Descrição",
-                          maxLines: null,
-                          minLines: 4,
-                          keyboardType: TextInputType.multiline,
-                        ),
+                        Observer(builder: (_) {
+                          return TextFieldCustom(
+                            onChanged: _addOrEditController.setDistrict,
+                            errorText: _addOrEditController.districtError,
+                            label: "Bairro",
+                          );
+                        }),
+                        Observer(builder: (_) {
+                          return TextFieldCustom(
+                            onChanged: _addOrEditController.setRoad,
+                            errorText: _addOrEditController.roadError,
+                            label: "Av/Rua",
+                          );
+                        }),
+                        Observer(builder: (_) {
+                          return TextFieldCustom(
+                            onChanged: _addOrEditController.setNameOccurrence,
+                            errorText: _addOrEditController.nameOccurrenceError,
+                            label: "Nome da Ocorrencia",
+                          );
+                        }),
+                        Observer(builder: (_) {
+                          return TextFieldCustom(
+                            onChanged: _addOrEditController.setDiscretion,
+                            errorText: _addOrEditController.discretionError,
+                            label: "Descrição",
+                            maxLines: null,
+                            minLines: 4,
+                            keyboardType: TextInputType.multiline,
+                          );
+                        }),
                       ],
                     ),
                     Divider(
                       color: Colors.transparent,
                       height: constraints.maxHeight * 0.04,
                     ),
-                    ButtonAnimated(
-                      controller: _addOrEditController,
-                      width: constraints.maxWidth * 0.45,
+                    InkWell(
+                      onTap: _addOrEditController.invalidSendPressed,
+                      child: Observer(builder: (_) {
+                        return MaterialButton(
+                          onPressed: _addOrEditController.loginPressed,
+                          child: Text(
+                            "Enviar",
+                            style: Fonts.fontsRoboto,
+                          ),
+                          color: Colors.blueGrey,
+                          elevation: 6,
+                          minWidth: constraints.maxWidth * 0.45,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          disabledColor: Colors.grey,
+                          disabledElevation: 1,
+                        );
+                      }),
                     ),
                     const Divider(height: 30),
                   ],

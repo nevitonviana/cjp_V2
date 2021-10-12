@@ -55,13 +55,13 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   final _$cityAtom = Atom(name: '_AddOrEditControllerBase.city');
 
   @override
-  String? get city {
+  String get city {
     _$cityAtom.reportRead();
     return super.city;
   }
 
   @override
-  set city(String? value) {
+  set city(String value) {
     _$cityAtom.reportWrite(value, super.city, () {
       super.city = value;
     });
@@ -70,13 +70,13 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   final _$districtAtom = Atom(name: '_AddOrEditControllerBase.district');
 
   @override
-  String? get district {
+  String get district {
     _$districtAtom.reportRead();
     return super.district;
   }
 
   @override
-  set district(String? value) {
+  set district(String value) {
     _$districtAtom.reportWrite(value, super.district, () {
       super.district = value;
     });
@@ -85,13 +85,13 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   final _$roadAtom = Atom(name: '_AddOrEditControllerBase.road');
 
   @override
-  String? get road {
+  String get road {
     _$roadAtom.reportRead();
     return super.road;
   }
 
   @override
-  set road(String? value) {
+  set road(String value) {
     _$roadAtom.reportWrite(value, super.road, () {
       super.road = value;
     });
@@ -101,13 +101,13 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
       Atom(name: '_AddOrEditControllerBase.nameOccurrence');
 
   @override
-  String? get nameOccurrence {
+  String get nameOccurrence {
     _$nameOccurrenceAtom.reportRead();
     return super.nameOccurrence;
   }
 
   @override
-  set nameOccurrence(String? value) {
+  set nameOccurrence(String value) {
     _$nameOccurrenceAtom.reportWrite(value, super.nameOccurrence, () {
       super.nameOccurrence = value;
     });
@@ -116,15 +116,30 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   final _$discretionAtom = Atom(name: '_AddOrEditControllerBase.discretion');
 
   @override
-  String? get discretion {
+  String get discretion {
     _$discretionAtom.reportRead();
     return super.discretion;
   }
 
   @override
-  set discretion(String? value) {
+  set discretion(String value) {
     _$discretionAtom.reportWrite(value, super.discretion, () {
       super.discretion = value;
+    });
+  }
+
+  final _$showErrorsAtom = Atom(name: '_AddOrEditControllerBase.showErrors');
+
+  @override
+  bool get showErrors {
+    _$showErrorsAtom.reportRead();
+    return super.showErrors;
+  }
+
+  @override
+  set showErrors(bool value) {
+    _$showErrorsAtom.reportWrite(value, super.showErrors, () {
+      super.showErrors = value;
     });
   }
 
@@ -196,6 +211,17 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   }
 
   @override
+  void invalidSendPressed() {
+    final _$actionInfo = _$_AddOrEditControllerBaseActionController.startAction(
+        name: '_AddOrEditControllerBase.invalidSendPressed');
+    try {
+      return super.invalidSendPressed();
+    } finally {
+      _$_AddOrEditControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 city: ${city},
@@ -203,6 +229,7 @@ district: ${district},
 road: ${road},
 nameOccurrence: ${nameOccurrence},
 discretion: ${discretion},
+showErrors: ${showErrors},
 cityValid: ${cityValid},
 districtValid: ${districtValid},
 roadValid: ${roadValid},
