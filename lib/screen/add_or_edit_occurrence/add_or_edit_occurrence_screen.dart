@@ -1,11 +1,19 @@
+import 'package:cjp_v2/screen/add_or_edit_occurrence/controller/add_or_edit.dart';
 import 'package:flutter/material.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import 'components/widgets/show_selected_image.dart';
 
-class AddOrEditOccurrence extends StatelessWidget {
+class AddOrEditOccurrence extends StatefulWidget {
   const AddOrEditOccurrence({Key? key}) : super(key: key);
+
+  @override
+  State<AddOrEditOccurrence> createState() => _AddOrEditOccurrenceState();
+}
+
+class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
+  final AddOrEditController _addOrEditController = AddOrEditController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,17 +72,25 @@ class AddOrEditOccurrence extends StatelessWidget {
                       ),
                     ),
                     Column(
-                      children: const [
+                      children: [
                         TextFieldCustom(
+                          onChanged: _addOrEditController.setDistrict,
+                          errorText: _addOrEditController.discretionError,
                           label: "Bairro",
                         ),
                         TextFieldCustom(
+                          onChanged: _addOrEditController.setRoad,
+                          errorText: _addOrEditController.roadError,
                           label: "Av/Rua",
                         ),
                         TextFieldCustom(
+                          onChanged: _addOrEditController.setNameOccurrence,
+                          errorText: _addOrEditController.nameOccurrenceError,
                           label: "Nome da Ocorrencia",
                         ),
                         TextFieldCustom(
+                          onChanged: _addOrEditController.setDistrict,
+                          errorText: _addOrEditController.discretionError,
                           label: "Descrição",
                           maxLines: null,
                           minLines: 4,
@@ -86,7 +102,11 @@ class AddOrEditOccurrence extends StatelessWidget {
                       color: Colors.transparent,
                       height: constraints.maxHeight * 0.04,
                     ),
-                    ButtonAnimated(controller: , width: constraints.maxWidth * 0.4),
+                    ButtonAnimated(
+                      controller: _addOrEditController,
+                      width: constraints.maxWidth * 0.45,
+                    ),
+                    const Divider(height: 30),
                   ],
                 ),
               ),

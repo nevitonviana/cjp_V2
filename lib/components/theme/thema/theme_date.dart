@@ -34,4 +34,5 @@ final ThemeData theme = ThemeData(
   //   brightness: Brightness.light,
   // ),
   primaryColor: Colors.grey,
+  dividerTheme: const DividerThemeData(color: Colors.transparent),
 );

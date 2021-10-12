@@ -30,14 +30,15 @@ class ButtonAnimated extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: controller.loginPressed,
-          child: controller.loading
-              ? const CircularProgressIndicator(
-                  color: Colors.blue,
-                )
-              : const Text(
-                  "Entrar",
-                  style: TextStyle(color: Colors.black),
-                ),
+          child: //controller?.loading
+              //     ? const CircularProgressIndicator(
+              //         color: Colors.blue,
+              //       )
+              //     :
+              const Text(
+            "Entrar",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       );
     });
