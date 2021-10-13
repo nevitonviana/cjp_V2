@@ -67,18 +67,18 @@ class Occurrence {
 
   Occurrence.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     id = snapshot.id;
-    idUser = snapshot["idUser"];
-    nameOccurrence = snapshot["nomeOcorrencia"];
-    district = snapshot["bairro"];
-    city = snapshot["cidade"];
-    road = snapshot["ruaAv"];
-    description = snapshot["descricao"];
-    photos = List<String>.from(snapshot["fotos"]);
-    feedback = snapshot["feedback"];
-    hour = snapshot["hora"];
-    visible = snapshot["visivel"];
-    status = snapshot["status"];
-    photoReference = List<String>.from(snapshot["referenciasFotos"]);
+    idUser = snapshot.get("idUser");
+    nameOccurrence = snapshot.get("nomeOcorrencia");
+    district = snapshot.get("bairro");
+    city = snapshot.get("cidade");
+    road = snapshot.get("ruaAv");
+    description = snapshot.get("descricao");
+    photos = List<String>.from(snapshot.get("fotos"));
+    feedback = snapshot.get("feedback");
+    hour = snapshot.get("hora");
+    visible = snapshot.get("visivel");
+    status = snapshot.get("status");
+    photoReference = List<String>.from(snapshot.get("referenciasFotos"));
   }
 
   Occurrence.geraId() {
