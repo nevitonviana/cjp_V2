@@ -1,4 +1,6 @@
+import 'package:cjp_v2/components/controller/user_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'components/widgets/drawer.dart';
 
@@ -10,26 +12,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Future a() async {
-  //   const List a = ["teste", "asas"];
-  //   const List b = [123, 2555];
-  //   return {'aa': a, 'bb': b};
-  // }
-  //
-  // b() async {
-  //   final f = await a().then((value) {
-  //     print("aaaaaaaaaaaa");
-  //     print(value);
-  //     print("aaaaaaaaaaaa");
-  //   });
-  //
-  //   print(f);
-  //   print(f['aa']);
-  // }
+  final UserController _controller = GetIt.I<UserController>();
 
   @override
   void initState() {
-    // b();
     super.initState();
   }
 
@@ -45,6 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 25,
           ),
         ),
+      ),
+      body: Center(
+        child: Text(_controller.usuario?.name ?? "000"),
       ),
     );
   }

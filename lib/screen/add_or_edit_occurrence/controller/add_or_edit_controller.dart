@@ -1,11 +1,11 @@
 import 'dart:io';
 
+import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
-import '/components/shared_preferences_user/shared_preferences_user.dart';
+import '/components/controller/user_controller.dart';
 import '/model/occurrence/occurrence.dart';
-import '/model/user/user.dart';
 import '/repositories/occurrence/occurrence.dart';
 
 part 'add_or_edit_controller.g.dart';
@@ -14,21 +14,13 @@ class AddOrEditController = _AddOrEditControllerBase with _$AddOrEditController;
 
 abstract class _AddOrEditControllerBase with Store {
   /// variables
-  final SharedPreferencesUser _preferencesUser = SharedPreferencesUser();
+  final UserController _userController = GetIt.I<UserController>();
   late Occurrence occurrence;
 
   _AddOrEditControllerBase() {
-    _getCity();
+    city = _userController.usuario!.city;
+    district = _userController.usuario!.district;
     occurrence = Occurrence.geraId();
-  }
-
-  late final Usuario _result;
-
-  void _getCity() async {
-    _result = await _preferencesUser.getInfoSharedUser();
-    if (_result.city.isNotEmpty) {
-      setCity(_result.city);
-    }
   }
 
   /// field listImage
@@ -201,7 +193,7 @@ abstract class _AddOrEditControllerBase with Store {
   Future<void> _addOrEditOccurrence() async {
     loading = true;
 
-    occurrence.idUser = _result.id;
+    occurrence.idUser = _userController.usuario!.id;
     occurrence.city = city;
     occurrence.district = district;
     occurrence.road = road;
