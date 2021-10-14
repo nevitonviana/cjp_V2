@@ -26,13 +26,13 @@ class CustomDrawer extends StatelessWidget {
                 text: "Adicionar Ocorrencia",
                 icons: Icons.note_alt_outlined,
               ),
-              const MenuButtonCustom(
+              MenuButtonCustom(
                 text: "Minhas Ocorrencias",
                 icons: Icons.list_alt_rounded,
-                // onTap: () => Navigator.pushNamed(
-                //   context,
-                //   RouteGenerate.route_Minhas_Ocorrencias,
-                // ),
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  RouteGenerate.routeMyOccurrence,
+                ),
               ),
               const MenuButtonCustom(
                 text: "Pefil",

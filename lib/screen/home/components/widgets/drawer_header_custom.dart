@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import '/components/controller/user_controller.dart';
 
 class DrawerHeaderCustom extends StatelessWidget {
   const DrawerHeaderCustom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    final UserController _controller = GetIt.I<UserController>();
+    return Center(
       child: UserAccountsDrawerHeader(
         arrowColor: Colors.black,
-        accountName: Text("_nome"),
-        accountEmail: Text("Centro de aJuda á População"),
+        accountName: Text(_controller.usuario!.name),
+        accountEmail: const Text("Centro de aJuda á População"),
         currentAccountPicture: CircleAvatar(
           radius: 55,
-          // backgroundImage: NetworkImage("_fotoPerfil", scale: 20),
+          backgroundImage: NetworkImage(
+            _controller.usuario!.photoUrl.isNotEmpty
+                ? _controller.usuario!.photoUrl
+                : "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392",
+            scale: 20,
+          ),
         ),
       ),
     );

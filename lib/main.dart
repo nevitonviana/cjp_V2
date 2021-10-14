@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import 'components/controller/user_controller.dart';
-import 'components/theme/thema/theme_date.dart';
+import 'components/theme/theme/theme_date.dart';
 import 'route_generate.dart';
 
 Future<void> main() async {

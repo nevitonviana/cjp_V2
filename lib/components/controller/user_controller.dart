@@ -1,6 +1,6 @@
-import 'package:cjp_v2/model/user/user.dart';
 import 'package:mobx/mobx.dart';
 
+import '/model/user/user.dart';
 import '../shared_preferences_user/shared_preferences_user.dart';
 
 part 'user_controller.g.dart';

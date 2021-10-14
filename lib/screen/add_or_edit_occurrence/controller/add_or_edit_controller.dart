@@ -169,7 +169,13 @@ abstract class _AddOrEditControllerBase with Store {
 
   ///button
   @computed
-  dynamic get loginPressed => discretionValid ? _addOrEditOccurrence : null;
+  dynamic get loginPressed => cityValid &&
+          districtValid &&
+          roadValid &&
+          nameOccurrenceValid &&
+          discretionValid
+      ? _addOrEditOccurrence
+      : null;
 
   @observable
   bool loading = false;
