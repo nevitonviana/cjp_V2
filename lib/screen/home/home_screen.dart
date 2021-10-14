@@ -17,15 +17,16 @@ class _HomeScreenState extends State<HomeScreen> {
   int b = 1236;
 
   aa() {
-    if (a != String) {
-      print(11111);
-      print(b);
-    }
-    if (a == String) {
-      print(2222222222);
-      print(a);
-    }
-    print(a.runtimeType);
+    // if (a != String) {
+    //   print(11111);
+    //   print(b);
+    // }
+    // if (a == String) {
+    //   print(2222222222);
+    //   print(a);
+    // }
+    // print(a.runtimeType);
+    print(_controller.usuario?.photoUrl);
   }
 
   @override

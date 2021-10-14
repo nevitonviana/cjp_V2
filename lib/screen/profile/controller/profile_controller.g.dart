@@ -120,6 +120,21 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     });
   }
 
+  final _$massageErrorAtom = Atom(name: '_ProfileControllerBase.massageError');
+
+  @override
+  String? get massageError {
+    _$massageErrorAtom.reportRead();
+    return super.massageError;
+  }
+
+  @override
+  set massageError(String? value) {
+    _$massageErrorAtom.reportWrite(value, super.massageError, () {
+      super.massageError = value;
+    });
+  }
+
   final _$getImageGalleryAsyncAction =
       AsyncAction('_ProfileControllerBase.getImageGallery');
 
@@ -195,6 +210,17 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
   }
 
   @override
+  void setMassageError(String value) {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
+        name: '_ProfileControllerBase.setMassageError');
+    try {
+      return super.setMassageError(value);
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 name: ${name},
@@ -202,6 +228,7 @@ city: ${city},
 district: ${district},
 image: ${image},
 showErrors: ${showErrors},
+massageError: ${massageError},
 nameValid: ${nameValid},
 cityValid: ${cityValid},
 districtValid: ${districtValid},

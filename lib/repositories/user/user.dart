@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '/model/user/user.dart';
 import '../firebase_error.dart';
@@ -65,6 +68,23 @@ class FirebaseUser {
     } catch (e) {
       return Future.error(
           "Não foi possível buscar suas informações no banco de dados");
+    }
+  }
+
+  Future saveImage({required String id, required File image}) async {
+    FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+    Reference folderSource = firebaseStorage.ref();
+    try {
+      Reference folder = folderSource.child("Foto_De_Perfil").child(id);
+      UploadTask uploadTask = folder.putFile(image);
+      uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
+        if (taskSnapshot.state == TaskState.success) {}
+      });
+      final get = await uploadTask.whenComplete(() {});
+      String url = await get.ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      return Future.error("Error ao salvar imagem");
     }
   }
 }

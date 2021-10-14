@@ -34,12 +34,12 @@ class FirebaseOccurrence {
       for (var _image in listImage) {
         String _nameImage = DateTime.now().millisecondsSinceEpoch.toString();
 
-        Reference arquivo = folderSource
+        Reference folder = folderSource
             .child("imagens_Ocorrencias")
             .child(idOccurrence)
             .child(_nameImage);
 
-        UploadTask uploadTask = arquivo.putFile(_image as File);
+        UploadTask uploadTask = folder.putFile(_image as File);
 
         uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
           if (taskSnapshot.state == TaskState.success) {}

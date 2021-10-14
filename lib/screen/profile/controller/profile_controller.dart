@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cjp_v2/model/user/user.dart';
+import 'package:cjp_v2/repositories/user/user.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -12,13 +14,13 @@ class ProfileController = _ProfileControllerBase with _$ProfileController;
 
 abstract class _ProfileControllerBase with Store {
   final UserController _userController = GetIt.I<UserController>();
+  Usuario _usuario = Usuario();
 
   _ProfileControllerBase() {
     name = _userController.usuario!.name;
     district = _userController.usuario!.district;
     city = _userController.usuario!.city;
-    image =
-        "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
+    // image = _userController.usuario?.photoUrl;
   }
 
   ///name
@@ -112,13 +114,36 @@ abstract class _ProfileControllerBase with Store {
     }
   }
 
+  /// Massage Error
+  @observable
+  String? massageError;
+
+  @action
+  void setMassageError(String value) => massageError = value;
+
   ///button
   @computed
   dynamic get profilePressed =>
-      districtValid && cityValid && nameValid && imageValid
-          ? _saveProfile
-          : null;
+      districtValid && cityValid && nameValid ? _saveProfile : null;
 
   @action
-  Future<void> _saveProfile() async {}
+  Future<void> _saveProfile() async {
+    _usuario = _userController.usuario!;
+    _usuario.name = name;
+    _usuario.city = city;
+    _usuario.district = district;
+    try {
+      image.runtimeType != String
+          ? await FirebaseUser()
+              .saveImage(id: _usuario.id, image: image)
+              .then((value) async {
+              _usuario.photoUrl = value;
+              await FirebaseUser().saveInfoUser(usuario: _usuario);
+            })
+          : await FirebaseUser().saveInfoUser(usuario: _usuario);
+    } catch (e) {
+      setMassageError(e.toString());
+      return;
+    }
+  }
 }
