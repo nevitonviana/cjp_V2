@@ -1,3 +1,4 @@
+import 'package:cjp_v2/route_generate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -28,6 +29,9 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
 
     when((_) => _addOrEditController.save, () {
       Navigator.of(context).pop();
+      Navigator.of(context).pushReplacementNamed(
+        RouteGenerate.routeMyOccurrence,
+      );
     });
 
     when((_) => _addOrEditController.massageError != null, () {
