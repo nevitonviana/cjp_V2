@@ -51,13 +51,13 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
       (_$discretionValidComputed ??= Computed<bool>(() => super.discretionValid,
               name: '_AddOrEditControllerBase.discretionValid'))
           .value;
-  Computed<dynamic>? _$loginPressedComputed;
+  Computed<dynamic>? _$addEditPressedComputed;
 
   @override
-  dynamic get loginPressed =>
-      (_$loginPressedComputed ??= Computed<dynamic>(() => super.loginPressed,
-              name: '_AddOrEditControllerBase.loginPressed'))
-          .value;
+  dynamic get addEditPressed => (_$addEditPressedComputed ??= Computed<dynamic>(
+          () => super.addEditPressed,
+          name: '_AddOrEditControllerBase.addEditPressed'))
+      .value;
 
   final _$cityAtom = Atom(name: '_AddOrEditControllerBase.city');
 
@@ -341,7 +341,7 @@ districtValid: ${districtValid},
 roadValid: ${roadValid},
 nameOccurrenceValid: ${nameOccurrenceValid},
 discretionValid: ${discretionValid},
-loginPressed: ${loginPressed}
+addEditPressed: ${addEditPressed}
     ''';
   }
 }

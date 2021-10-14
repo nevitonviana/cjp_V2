@@ -169,7 +169,7 @@ abstract class _AddOrEditControllerBase with Store {
 
   ///button
   @computed
-  dynamic get loginPressed => cityValid &&
+  dynamic get addEditPressed => cityValid &&
           districtValid &&
           roadValid &&
           nameOccurrenceValid &&

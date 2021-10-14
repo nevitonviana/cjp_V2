@@ -167,7 +167,7 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                       onTap: _addOrEditController.invalidSendPressed,
                       child: Observer(builder: (_) {
                         return MaterialButton(
-                          onPressed: _addOrEditController.loginPressed,
+                          onPressed: _addOrEditController.addEditPressed,
                           child: Text(
                             "Enviar",
                             style: Fonts.fontsRoboto,

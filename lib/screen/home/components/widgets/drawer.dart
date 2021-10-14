@@ -34,11 +34,13 @@ class CustomDrawer extends StatelessWidget {
                   RouteGenerate.routeMyOccurrence,
                 ),
               ),
-              const MenuButtonCustom(
+              MenuButtonCustom(
                 text: "Pefil",
                 icons: Icons.person,
-                // onTap: () =>
-                //     Navigator.pushNamed(context, RouteGenerate.route_Perfil),
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  RouteGenerate.routeProfile,
+                ),
               ),
               const MenuButtonCustom(
                 text: "FeedBack",

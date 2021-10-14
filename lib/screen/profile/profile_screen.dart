@@ -1,3 +1,4 @@
+import 'package:cjp_v2/screen/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -10,6 +11,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProfileController profileController = ProfileController();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Perfil"),
@@ -22,28 +24,43 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const PhotoProfile(),
+                PhotoProfile(
+                  height: constraints.maxHeight,
+                  profileController: profileController,
+                ),
                 Divider(
                   height: constraints.maxHeight * 0.03,
                   color: Colors.transparent,
                 ),
-                const TextFieldCustom(
-                  label: "Nome",
-                ),
-                const TextFieldCustom(
-                  label: "Bairro",
-                ),
-                const TextFieldCustom(
-                  label: "Cidade",
-                ),
+                Observer(builder: (_) {
+                  return TextFieldCustom(
+                    onChanged: profileController.setName,
+                    errorText: profileController.nameError,
+                    label: "Nome",
+                  );
+                }),
+                Observer(builder: (_) {
+                  return TextFieldCustom(
+                    onChanged: profileController.setDistrict,
+                    errorText: profileController.districtError,
+                    label: "Bairro",
+                  );
+                }),
+                Observer(builder: (_) {
+                  return TextFieldCustom(
+                    onChanged: profileController.setCity,
+                    errorText: profileController.cityError,
+                    label: "Cidade",
+                  );
+                }),
                 Divider(
                   height: constraints.maxHeight * 0.04,
                 ),
                 InkWell(
-                  // onTap: _addOrEditController.invalidSendPressed,
+                  onTap: profileController.invalidSendPressed,
                   child: Observer(builder: (_) {
                     return MaterialButton(
-                      onPressed: () {}, // _addOrEditController.loginPressed,
+                      onPressed: profileController.profilePressed,
                       child: Text(
                         "Enviar",
                         style: Fonts.fontsRoboto,
