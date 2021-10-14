@@ -1,6 +1,7 @@
-import 'package:cjp_v2/screen/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '/screen/profile/controller/profile_controller.dart';
 
 class PhotoProfile extends StatelessWidget {
   final ProfileController profileController;
@@ -23,19 +24,8 @@ class PhotoProfile extends StatelessWidget {
         builder: (_) {
           return GestureDetector(
             onTap: profileController.getImageGallery,
-            child: profileController.image != null
-                ? CircleAvatar(
-                    radius: 100,
-                    backgroundImage: FileImage(
-                      profileController.image,
-                    ),
-                    child: const Icon(
-                      Icons.add_photo_alternate,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                  )
-                : const CircleAvatar(
+            child: profileController.image == null
+                ? const CircleAvatar(
                     backgroundColor: Colors.grey,
                     radius: 100,
                     child: Icon(
@@ -43,11 +33,33 @@ class PhotoProfile extends StatelessWidget {
                       color: Colors.white,
                       size: 35,
                     ),
-                  ),
+                  )
+                : profileController.image.runtimeType != String
+                    ? CircleAvatar(
+                        radius: 100,
+                        backgroundImage: FileImage(
+                          profileController.image,
+                        ),
+                        child: const Icon(
+                          Icons.add_photo_alternate,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      )
+                    : CircleAvatar(
+                        radius: 100,
+                        backgroundImage: NetworkImage(
+                          profileController.image,
+                        ),
+                        child: const Icon(
+                          Icons.add_photo_alternate,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
           );
         },
       ),
     );
   }
 }
-// NetworkImage(),

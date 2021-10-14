@@ -13,9 +13,24 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final UserController _controller = GetIt.I<UserController>();
+  String a = "teste";
+  int b = 1236;
+
+  aa() {
+    if (a != String) {
+      print(11111);
+      print(b);
+    }
+    if (a == String) {
+      print(2222222222);
+      print(a);
+    }
+    print(a.runtimeType);
+  }
 
   @override
   void initState() {
+    aa();
     super.initState();
   }
 

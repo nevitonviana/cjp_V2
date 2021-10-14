@@ -1,10 +1,10 @@
-import 'package:cjp_v2/screen/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import '/screen/profile/components/widgets/photo_profile.dart';
+import '/screen/profile/controller/profile_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -34,6 +34,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Observer(builder: (_) {
                   return TextFieldCustom(
+                    initialValue: profileController.name,
                     onChanged: profileController.setName,
                     errorText: profileController.nameError,
                     label: "Nome",
@@ -41,6 +42,7 @@ class ProfileScreen extends StatelessWidget {
                 }),
                 Observer(builder: (_) {
                   return TextFieldCustom(
+                    initialValue: profileController.district,
                     onChanged: profileController.setDistrict,
                     errorText: profileController.districtError,
                     label: "Bairro",
@@ -48,6 +50,7 @@ class ProfileScreen extends StatelessWidget {
                 }),
                 Observer(builder: (_) {
                   return TextFieldCustom(
+                    initialValue: profileController.city,
                     onChanged: profileController.setCity,
                     errorText: profileController.cityError,
                     label: "Cidade",
@@ -56,6 +59,19 @@ class ProfileScreen extends StatelessWidget {
                 Divider(
                   height: constraints.maxHeight * 0.04,
                 ),
+                Observer(builder: (_) {
+                  return profileController.imageError != null
+                      ? Container(
+                          margin: EdgeInsets.only(
+                              bottom: constraints.maxHeight * 0.03),
+                          child: Text(
+                            profileController.imageError!,
+                            style: const TextStyle(
+                                color: Colors.red, fontSize: 15),
+                          ),
+                        )
+                      : Container();
+                }),
                 InkWell(
                   onTap: profileController.invalidSendPressed,
                   child: Observer(builder: (_) {

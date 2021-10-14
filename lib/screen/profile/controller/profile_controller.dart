@@ -1,13 +1,26 @@
 import 'dart:io';
 
+import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
+
+import '/components/controller/user_controller.dart';
 
 part 'profile_controller.g.dart';
 
 class ProfileController = _ProfileControllerBase with _$ProfileController;
 
 abstract class _ProfileControllerBase with Store {
+  final UserController _userController = GetIt.I<UserController>();
+
+  _ProfileControllerBase() {
+    name = _userController.usuario!.name;
+    district = _userController.usuario!.district;
+    city = _userController.usuario!.city;
+    image =
+        "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
+  }
+
   ///name
   @observable
   String name = "";
@@ -64,13 +77,13 @@ abstract class _ProfileControllerBase with Store {
 
   ///image
   @observable
-  var image;
+  dynamic image;
 
   @action
-  void setImage(var value) => image = value;
+  void setImage(dynamic value) => image = value;
 
   @computed
-  bool get imageValid => image.isNotEmpty;
+  bool get imageValid => image != null;
 
   String? get imageError {
     if (!showErrors || imageValid) {
@@ -101,7 +114,10 @@ abstract class _ProfileControllerBase with Store {
 
   ///button
   @computed
-  dynamic get profilePressed => districtValid ? _saveProfile : null;
+  dynamic get profilePressed =>
+      districtValid && cityValid && nameValid && imageValid
+          ? _saveProfile
+          : null;
 
   @action
   Future<void> _saveProfile() async {}
