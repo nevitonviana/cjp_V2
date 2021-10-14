@@ -8,7 +8,7 @@ class Occurrence {
   String? district;
   String? road;
   String? description;
-  List<String>? photos = [];
+  List<String>? listPhotos = [];
   String? feedback;
   String? hour;
   bool visible = true;
@@ -23,7 +23,7 @@ class Occurrence {
     this.district,
     this.road,
     this.description,
-    this.photos,
+    this.listPhotos,
     this.feedback,
     this.hour,
     this.visible = true,
@@ -40,7 +40,7 @@ class Occurrence {
       "bairro": district,
       "ruaAv": road,
       "descricao": description,
-      "fotos": photos,
+      "fotos": listPhotos,
       "feedback": feedback,
       "hora": hour,
       "visivel": visible,
@@ -57,7 +57,7 @@ class Occurrence {
     city = occurrence.city;
     road = occurrence.road;
     description = occurrence.description;
-    photos = [];
+    listPhotos = [];
     feedback = occurrence.feedback;
     hour = occurrence.hour;
     visible = occurrence.visible;
@@ -73,7 +73,7 @@ class Occurrence {
     city = snapshot.get("cidade");
     road = snapshot.get("ruaAv");
     description = snapshot.get("descricao");
-    photos = List<String>.from(snapshot.get("fotos"));
+    listPhotos = List<String>.from(snapshot.get("fotos"));
     feedback = snapshot.get("feedback");
     hour = snapshot.get("hora");
     visible = snapshot.get("visivel");
@@ -85,7 +85,7 @@ class Occurrence {
     FirebaseFirestore _db = FirebaseFirestore.instance;
     CollectionReference idOccurrence = _db.collection("ocorrencias");
     id = idOccurrence.doc().id;
-    photos = [];
+    listPhotos = [];
     photoReference = [];
   }
 }

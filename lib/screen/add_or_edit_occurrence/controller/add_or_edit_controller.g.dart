@@ -150,6 +150,52 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_AddOrEditControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$massageErrorAtom =
+      Atom(name: '_AddOrEditControllerBase.massageError');
+
+  @override
+  String? get massageError {
+    _$massageErrorAtom.reportRead();
+    return super.massageError;
+  }
+
+  @override
+  set massageError(String? value) {
+    _$massageErrorAtom.reportWrite(value, super.massageError, () {
+      super.massageError = value;
+    });
+  }
+
+  final _$saveAtom = Atom(name: '_AddOrEditControllerBase.save');
+
+  @override
+  bool get save {
+    _$saveAtom.reportRead();
+    return super.save;
+  }
+
+  @override
+  set save(bool value) {
+    _$saveAtom.reportWrite(value, super.save, () {
+      super.save = value;
+    });
+  }
+
   final _$getImageGalleryAsyncAction =
       AsyncAction('_AddOrEditControllerBase.getImageGallery');
 
@@ -245,6 +291,39 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   }
 
   @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_AddOrEditControllerBaseActionController.startAction(
+        name: '_AddOrEditControllerBase.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_AddOrEditControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setMassageError(String value) {
+    final _$actionInfo = _$_AddOrEditControllerBaseActionController.startAction(
+        name: '_AddOrEditControllerBase.setMassageError');
+    try {
+      return super.setMassageError(value);
+    } finally {
+      _$_AddOrEditControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSave(bool value) {
+    final _$actionInfo = _$_AddOrEditControllerBaseActionController.startAction(
+        name: '_AddOrEditControllerBase.setSave');
+    try {
+      return super.setSave(value);
+    } finally {
+      _$_AddOrEditControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 city: ${city},
@@ -253,6 +332,9 @@ road: ${road},
 nameOccurrence: ${nameOccurrence},
 discretion: ${discretion},
 showErrors: ${showErrors},
+loading: ${loading},
+massageError: ${massageError},
+save: ${save},
 imageValid: ${imageValid},
 cityValid: ${cityValid},
 districtValid: ${districtValid},

@@ -3,11 +3,34 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
+import '/components/shared_preferences_user/shared_preferences_user.dart';
+import '/model/occurrence/occurrence.dart';
+import '/model/user/user.dart';
+import '/repositories/occurrence/occurrence.dart';
+
 part 'add_or_edit_controller.g.dart';
 
 class AddOrEditController = _AddOrEditControllerBase with _$AddOrEditController;
 
 abstract class _AddOrEditControllerBase with Store {
+  /// variables
+  final SharedPreferencesUser _preferencesUser = SharedPreferencesUser();
+  late Occurrence occurrence;
+
+  _AddOrEditControllerBase() {
+    _getCity();
+    occurrence = Occurrence.geraId();
+  }
+
+  late final Usuario _result;
+
+  void _getCity() async {
+    _result = await _preferencesUser.getInfoSharedUser();
+    if (_result.city.isNotEmpty) {
+      setCity(_result.city);
+    }
+  }
+
   /// field listImage
   ObservableList listImage = ObservableList();
 
@@ -32,7 +55,7 @@ abstract class _AddOrEditControllerBase with Store {
   @computed
   bool get cityValid => city.length >= 3;
 
-  String? get nameError {
+  String? get cityError {
     if (!showErrors || cityValid) {
       return null;
     } else if (city.isEmpty) {
@@ -156,6 +179,50 @@ abstract class _AddOrEditControllerBase with Store {
   @computed
   dynamic get loginPressed => discretionValid ? _addOrEditOccurrence : null;
 
+  @observable
+  bool loading = false;
+
   @action
-  Future<void> _addOrEditOccurrence() async {}
+  void setLoading(bool value) => loading = value;
+
+  @observable
+  String? massageError;
+
+  @action
+  void setMassageError(String value) => massageError = value;
+
+  @observable
+  bool save = false;
+
+  @action
+  void setSave(bool value) => save = value;
+
+  @action
+  Future<void> _addOrEditOccurrence() async {
+    loading = true;
+
+    occurrence.idUser = _result.id;
+    occurrence.city = city;
+    occurrence.district = district;
+    occurrence.road = road;
+    occurrence.nameOccurrence = nameOccurrence;
+    occurrence.description = discretion;
+    occurrence.hour = DateTime.now().toString();
+
+    try {
+      await FirebaseOccurrence()
+          .savaImageStorage(listImage: listImage, idOccurrence: occurrence.id!)
+          .then((value) async {
+        occurrence.listPhotos = value["listUrl"];
+        occurrence.photoReference = value["listReference"];
+        await FirebaseOccurrence()
+            .saveOccurrence(occurrence: occurrence)
+            .then((value) => setSave(true));
+      });
+    } catch (e) {
+      setMassageError(e.toString());
+      return;
+    }
+    loading = false;
+  }
 }

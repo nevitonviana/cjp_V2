@@ -9,7 +9,7 @@ class RouteGenerate {
   static const String routeAddOccurrence = "/AddOccurrence";
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
-    dynamic args = settings.arguments;
+    // dynamic args = settings.arguments;
     switch (settings.name) {
       case "/home":
         return MaterialPageRoute(

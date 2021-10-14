@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
@@ -15,6 +16,26 @@ class AddOrEditOccurrence extends StatefulWidget {
 
 class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
   final AddOrEditController _addOrEditController = AddOrEditController();
+
+  @override
+  void initState() {
+    super.initState();
+    autorun((_) {
+      if (_addOrEditController.loading) {
+        SaveDialog().save(buildContext: context, msg: "Salvando Ocorrencia");
+      }
+    });
+
+    when((_) => _addOrEditController.save, () {
+      Navigator.of(context).pop();
+    });
+
+    when((_) => _addOrEditController.massageError != null, () {
+      OpenDialog()
+          .error(context: context, error: _addOrEditController.massageError!);
+      Navigator.of(context).pop();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +100,17 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                     Column(
                       children: [
                         Observer(builder: (_) {
+                          return _addOrEditController.city.isEmpty
+                              ? TextFieldCustom(
+                                  onChanged: _addOrEditController.setCity,
+                                  errorText: _addOrEditController.cityError,
+                                  label: "Cidade",
+                                )
+                              : Container();
+                        }),
+                        Observer(builder: (_) {
                           return TextFieldCustom(
+                            initialValue: _addOrEditController.district,
                             onChanged: _addOrEditController.setDistrict,
                             errorText: _addOrEditController.districtError,
                             label: "Bairro",
