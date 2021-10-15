@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OpenDialog {
+class ErrorDialog {
   error({required BuildContext context, required String error}) async {
     showDialog(
       context: context,

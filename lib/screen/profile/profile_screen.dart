@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import '/screen/profile/components/widgets/photo_profile.dart';
 import '/screen/profile/controller/profile_controller.dart';
+import '../../route_generate.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -14,14 +16,32 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final ProfileController profileController = ProfileController();
+
   @override
   void initState() {
     super.initState();
+    autorun((_) {
+      if (profileController.massageError != null) {
+        ErrorDialog().error(
+          context: context,
+          error: profileController.massageError!,
+        );
+      }
+      if (profileController.loading) {
+        SaveDialog().save(buildContext: context, msg: "Atualizando Perfill");
+      }
+    });
+
+    when((_) => profileController.saveInfo, () {
+      Navigator.of(context).pop();
+      Navigator.pushNamedAndRemoveUntil(
+          context, RouteGenerate.routeHome, (route) => false);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController profileController = ProfileController();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Perfil"),

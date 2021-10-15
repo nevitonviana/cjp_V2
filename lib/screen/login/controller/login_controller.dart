@@ -54,7 +54,7 @@ abstract class _LoginControllerBase with Store {
 
   //button
   @computed
-  dynamic get loginPressed => emailValid && passwordValid ? _login : null;
+  dynamic get pressed => emailValid && passwordValid ? _login : null;
 
   @action
   Future<void> _login() async {

@@ -140,7 +140,7 @@ abstract class _AccountControllerBase with Store {
 
   ///button
   @computed
-  dynamic get loginPressed => emailValid &&
+  dynamic get pressed => emailValid &&
           passwordValid &&
           nameValid &&
           cityValid &&

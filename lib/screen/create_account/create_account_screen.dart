@@ -20,7 +20,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     super.initState();
     autorun((_) {
       if (_accountController.errorMessage != null) {
-        OpenDialog().error(
+        ErrorDialog().error(
           context: context,
           error: _accountController.errorMessage!,
         );

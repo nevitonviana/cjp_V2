@@ -26,7 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
     //   print(a);
     // }
     // print(a.runtimeType);
-    print(_controller.usuario?.photoUrl);
+    // print(_controller.user?.photoUrl);
+    // print(_controller.user!.photoUrl.runtimeType);
   }
 
   @override
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Center(
-        child: Text(_controller.usuario?.name ?? "000"),
+        child: Text(_controller.user?.name ?? "000"),
       ),
     );
   }

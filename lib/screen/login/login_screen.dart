@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     autorun((_) {
       if (_loginController.error != null) {
-        OpenDialog().error(
+        ErrorDialog().error(
           context: context,
           error: _loginController.error!,
         );

@@ -30,13 +30,6 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
       (_$districtValidComputed ??= Computed<bool>(() => super.districtValid,
               name: '_ProfileControllerBase.districtValid'))
           .value;
-  Computed<bool>? _$imageValidComputed;
-
-  @override
-  bool get imageValid =>
-      (_$imageValidComputed ??= Computed<bool>(() => super.imageValid,
-              name: '_ProfileControllerBase.imageValid'))
-          .value;
   Computed<dynamic>? _$profilePressedComputed;
 
   @override
@@ -105,6 +98,21 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
     });
   }
 
+  final _$imageErrorAtom = Atom(name: '_ProfileControllerBase.imageError');
+
+  @override
+  String? get imageError {
+    _$imageErrorAtom.reportRead();
+    return super.imageError;
+  }
+
+  @override
+  set imageError(String? value) {
+    _$imageErrorAtom.reportWrite(value, super.imageError, () {
+      super.imageError = value;
+    });
+  }
+
   final _$showErrorsAtom = Atom(name: '_ProfileControllerBase.showErrors');
 
   @override
@@ -132,6 +140,21 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
   set massageError(String? value) {
     _$massageErrorAtom.reportWrite(value, super.massageError, () {
       super.massageError = value;
+    });
+  }
+
+  final _$saveInfoAtom = Atom(name: '_ProfileControllerBase.saveInfo');
+
+  @override
+  bool get saveInfo {
+    _$saveInfoAtom.reportRead();
+    return super.saveInfo;
+  }
+
+  @override
+  set saveInfo(bool value) {
+    _$saveInfoAtom.reportWrite(value, super.saveInfo, () {
+      super.saveInfo = value;
     });
   }
 
@@ -199,6 +222,17 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
   }
 
   @override
+  void setImageError(String value) {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
+        name: '_ProfileControllerBase.setImageError');
+    try {
+      return super.setImageError(value);
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void invalidSendPressed() {
     final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
         name: '_ProfileControllerBase.invalidSendPressed');
@@ -221,18 +255,41 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
   }
 
   @override
+  void setSaveInfo(bool value) {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
+        name: '_ProfileControllerBase.setSaveInfo');
+    try {
+      return super.setSaveInfo(value);
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction(
+        name: '_ProfileControllerBase.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 name: ${name},
 city: ${city},
 district: ${district},
 image: ${image},
+imageError: ${imageError},
 showErrors: ${showErrors},
 massageError: ${massageError},
+saveInfo: ${saveInfo},
 nameValid: ${nameValid},
 cityValid: ${cityValid},
 districtValid: ${districtValid},
-imageValid: ${imageValid},
 profilePressed: ${profilePressed}
     ''';
   }

@@ -25,6 +25,11 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
       if (_addOrEditController.loading) {
         SaveDialog().save(buildContext: context, msg: "Salvando Ocorrencia");
       }
+      if (_addOrEditController.massageError != null) {
+        ErrorDialog()
+            .error(context: context, error: _addOrEditController.massageError!);
+        Navigator.of(context).pop();
+      }
     });
 
     when((_) => _addOrEditController.save, () {
@@ -32,12 +37,6 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
       Navigator.of(context).pushReplacementNamed(
         RouteGenerate.routeMyOccurrence,
       );
-    });
-
-    when((_) => _addOrEditController.massageError != null, () {
-      OpenDialog()
-          .error(context: context, error: _addOrEditController.massageError!);
-      Navigator.of(context).pop();
     });
   }
 

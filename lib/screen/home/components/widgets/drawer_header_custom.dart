@@ -12,13 +12,13 @@ class DrawerHeaderCustom extends StatelessWidget {
     return Center(
       child: UserAccountsDrawerHeader(
         arrowColor: Colors.black,
-        accountName: Text(_controller.usuario!.name),
+        accountName: Text(_controller.user!.name),
         accountEmail: const Text("Centro de aJuda á População"),
         currentAccountPicture: CircleAvatar(
           radius: 55,
           backgroundImage: NetworkImage(
-            _controller.usuario!.photoUrl.isNotEmpty
-                ? _controller.usuario!.photoUrl
+            _controller.user!.photoUrl.isNotEmpty
+                ? _controller.user!.photoUrl
                 : "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392",
             scale: 20,
           ),

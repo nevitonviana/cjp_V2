@@ -51,12 +51,12 @@ mixin _$AccountController on _AccountControllerBase, Store {
           Computed<bool>(() => super.repeatPasswordValid,
               name: '_AccountControllerBase.repeatPasswordValid'))
       .value;
-  Computed<dynamic>? _$loginPressedComputed;
+  Computed<dynamic>? _$pressedComputed;
 
   @override
-  dynamic get loginPressed =>
-      (_$loginPressedComputed ??= Computed<dynamic>(() => super.loginPressed,
-              name: '_AccountControllerBase.loginPressed'))
+  dynamic get pressed =>
+      (_$pressedComputed ??= Computed<dynamic>(() => super.pressed,
+              name: '_AccountControllerBase.pressed'))
           .value;
 
   final _$nameAtom = Atom(name: '_AccountControllerBase.name');
@@ -323,7 +323,7 @@ cityValid: ${cityValid},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
 repeatPasswordValid: ${repeatPasswordValid},
-loginPressed: ${loginPressed}
+pressed: ${pressed}
     ''';
   }
 }

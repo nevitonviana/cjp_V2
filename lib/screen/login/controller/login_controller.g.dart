@@ -23,12 +23,12 @@ mixin _$LoginController on _LoginControllerBase, Store {
       (_$passwordValidComputed ??= Computed<bool>(() => super.passwordValid,
               name: '_LoginControllerBase.passwordValid'))
           .value;
-  Computed<dynamic>? _$loginPressedComputed;
+  Computed<dynamic>? _$pressedComputed;
 
   @override
-  dynamic get loginPressed =>
-      (_$loginPressedComputed ??= Computed<dynamic>(() => super.loginPressed,
-              name: '_LoginControllerBase.loginPressed'))
+  dynamic get pressed =>
+      (_$pressedComputed ??= Computed<dynamic>(() => super.pressed,
+              name: '_LoginControllerBase.pressed'))
           .value;
 
   final _$emailAtom = Atom(name: '_LoginControllerBase.email');
@@ -210,7 +210,7 @@ loading: ${loading},
 error: ${error},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
-loginPressed: ${loginPressed}
+pressed: ${pressed}
     ''';
   }
 }

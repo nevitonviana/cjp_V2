@@ -20,7 +20,7 @@ class ButtonAnimated extends StatelessWidget {
         constraints: BoxConstraints.loose(
           Size(width, 40),
         ),
-        height: controller.addEditPressed == null ? 0 : 40,
+        height: controller.pressed == null ? 0 : 40,
         width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
@@ -29,7 +29,7 @@ class ButtonAnimated extends StatelessWidget {
           ),
         ),
         child: ElevatedButton(
-          onPressed: controller.addEditPressed,
+          onPressed: controller.pressed,
           child: controller?.loading
               ? const CircularProgressIndicator(
                   color: Colors.blue,

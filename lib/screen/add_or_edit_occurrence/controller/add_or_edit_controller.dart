@@ -18,8 +18,8 @@ abstract class _AddOrEditControllerBase with Store {
   late Occurrence occurrence;
 
   _AddOrEditControllerBase() {
-    city = _userController.usuario!.city;
-    district = _userController.usuario!.district;
+    city = _userController.user!.city;
+    district = _userController.user!.district;
     occurrence = Occurrence.geraId();
   }
 
@@ -199,7 +199,7 @@ abstract class _AddOrEditControllerBase with Store {
   Future<void> _addOrEditOccurrence() async {
     loading = true;
 
-    occurrence.idUser = _userController.usuario!.id;
+    occurrence.idUser = _userController.user!.id;
     occurrence.city = city;
     occurrence.district = district;
     occurrence.road = road;
