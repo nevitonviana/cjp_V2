@@ -63,12 +63,12 @@ class FeedBack extends StatelessWidget {
                       hintText: "EX: a tela de perfil não abril",
                     ),
                     Divider(
-                      height: constraints.maxHeight * 0.06,
+                      height: constraints.maxHeight * 0.04,
                     ),
                     MaterialButton(
                       onPressed: () {},
                       child: const Text("Enviar"),
-                      minWidth: constraints.maxWidth * 0.4,
+                      minWidth: constraints.maxWidth * 0.3,
                       color: Colors.blueGrey,
                       elevation: 6,
                     ),

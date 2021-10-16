@@ -35,18 +35,18 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               MenuButtonCustom(
-                text: "Pefil",
+                text: "Perfil",
                 icons: Icons.person,
                 onTap: () => Navigator.pushNamed(
                   context,
                   RouteGenerate.routeProfile,
                 ),
               ),
-              const MenuButtonCustom(
+              MenuButtonCustom(
                 text: "FeedBack",
                 icons: Icons.feedback_outlined,
-                // onTap: () =>
-                //     Navigator.pushNamed(context, RouteGenerate.route_FeedBack),
+                onTap: () =>
+                    Navigator.pushNamed(context, RouteGenerate.routeFeedback),
               ),
               const MenuButtonCustom(
                 // onTap: () => _signOut(),
