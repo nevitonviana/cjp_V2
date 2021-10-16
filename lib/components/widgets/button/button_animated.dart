@@ -13,33 +13,35 @@ class ButtonAnimated extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      return AnimatedContainer(
-        curve: Curves.easeInCirc,
-        duration: const Duration(milliseconds: 600),
-        constraints: BoxConstraints.loose(
-          Size(width, 40),
-        ),
-        height: controller.pressed == null ? 0 : 40,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: const Border.fromBorderSide(
-            BorderSide(color: Colors.grey),
+    return Observer(
+      builder: (_) {
+        return AnimatedContainer(
+          curve: Curves.easeInCirc,
+          duration: const Duration(milliseconds: 600),
+          constraints: BoxConstraints.loose(
+            Size(width, 40),
           ),
-        ),
-        child: ElevatedButton(
-          onPressed: controller.pressed,
-          child: controller?.loading
-              ? const CircularProgressIndicator(
-                  color: Colors.blue,
-                )
-              : const Text(
-                  "Entrar",
-                  style: TextStyle(color: Colors.black),
-                ),
-        ),
-      );
-    });
+          height: controller.pressed == null ? 0 : 40,
+          width: width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: const Border.fromBorderSide(
+              BorderSide(color: Colors.grey),
+            ),
+          ),
+          child: ElevatedButton(
+            onPressed: controller.pressed,
+            child: controller?.loading
+                ? const CircularProgressIndicator(
+                    color: Colors.blue,
+                  )
+                : const Text(
+                    "Entrar",
+                    style: TextStyle(color: Colors.black),
+                  ),
+          ),
+        );
+      },
+    );
   }
 }

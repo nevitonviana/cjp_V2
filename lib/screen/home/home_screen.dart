@@ -1,7 +1,7 @@
-import 'package:cjp_v2/components/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '/components/controller/user_controller.dart';
 import 'components/widgets/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,17 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int b = 1236;
 
   aa() {
-    // if (a != String) {
-    //   print(11111);
-    //   print(b);
-    // }
-    // if (a == String) {
-    //   print(2222222222);
-    //   print(a);
-    // }
-    // print(a.runtimeType);
-    // print(_controller.user?.photoUrl);
-    // print(_controller.user!.photoUrl.runtimeType);
+    _controller.user != null ? print("145236") : print("111111111");
   }
 
   @override
