@@ -3,7 +3,9 @@ import 'package:cjp_v2/route_generate.dart';
 import 'package:flutter/material.dart';
 
 class MassageDialog {
-  save({required BuildContext context, required String error}) async {
+  save({
+    required BuildContext context,
+  }) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -15,17 +17,18 @@ class MassageDialog {
                 alignment: Alignment.center,
                 height: 40,
                 width: double.infinity,
-                color: Colors.cyanAccent,
+                color: Colors.lightBlue.shade100,
                 child: const Text(
                   "Obrigado 😁",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 19),
                 ),
               ),
               Container(
                 alignment: Alignment.center,
                 height: 90,
                 child: Text(
-                  "Obrigado pelo seu feedback, Ele e muito importante para nós ",
+                  "Obrigado pelo seu feedback,\n Ele e muito importante para nós ",
                   textAlign: TextAlign.center,
                   style: Fonts.fontsAlfaslabOne,
                 ),

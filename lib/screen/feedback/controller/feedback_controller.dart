@@ -20,7 +20,7 @@ abstract class _FeedBackControllerBase with Store {
   void setFaultName(String value) => faultName = value;
 
   @computed
-  bool get faultNameValid => faultName != null && faultName!.length > 5;
+  bool get faultNameValid => faultName != null && faultName!.length > 4;
 
   String? get faultNameError {
     if (faultName == null || faultNameValid) {
@@ -59,12 +59,19 @@ abstract class _FeedBackControllerBase with Store {
   @action
   void setLoading(bool value) => loading = value;
 
-  ///
+  ///massage error
   @observable
   String? messageError;
 
   @action
   void setMessageError(String value) => messageError = value;
+
+  ///
+  @observable
+  bool saveFeedback = false;
+
+  @action
+  void setSaveFeedback(bool value) => saveFeedback = value;
 
   ///Button
   @computed
@@ -79,7 +86,9 @@ abstract class _FeedBackControllerBase with Store {
       description: description,
     );
     try {
-      await FirebaseFeedBack().saveFeedback(feedBackModel: feedBackModel);
+      await FirebaseFeedBack()
+          .saveFeedback(feedBackModel: feedBackModel)
+          .then((value) => setSaveFeedback(true));
     } catch (e) {
       setMessageError(e.toString());
       return;

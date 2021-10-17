@@ -76,6 +76,36 @@ mixin _$FeedBackController on _FeedBackControllerBase, Store {
     });
   }
 
+  final _$messageErrorAtom = Atom(name: '_FeedBackControllerBase.messageError');
+
+  @override
+  String? get messageError {
+    _$messageErrorAtom.reportRead();
+    return super.messageError;
+  }
+
+  @override
+  set messageError(String? value) {
+    _$messageErrorAtom.reportWrite(value, super.messageError, () {
+      super.messageError = value;
+    });
+  }
+
+  final _$saveFeedbackAtom = Atom(name: '_FeedBackControllerBase.saveFeedback');
+
+  @override
+  bool get saveFeedback {
+    _$saveFeedbackAtom.reportRead();
+    return super.saveFeedback;
+  }
+
+  @override
+  set saveFeedback(bool value) {
+    _$saveFeedbackAtom.reportWrite(value, super.saveFeedback, () {
+      super.saveFeedback = value;
+    });
+  }
+
   final _$_feedbackAsyncAction =
       AsyncAction('_FeedBackControllerBase._feedback');
 
@@ -121,11 +151,35 @@ mixin _$FeedBackController on _FeedBackControllerBase, Store {
   }
 
   @override
+  void setMessageError(String value) {
+    final _$actionInfo = _$_FeedBackControllerBaseActionController.startAction(
+        name: '_FeedBackControllerBase.setMessageError');
+    try {
+      return super.setMessageError(value);
+    } finally {
+      _$_FeedBackControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSaveFeedback(bool value) {
+    final _$actionInfo = _$_FeedBackControllerBaseActionController.startAction(
+        name: '_FeedBackControllerBase.setSaveFeedback');
+    try {
+      return super.setSaveFeedback(value);
+    } finally {
+      _$_FeedBackControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 faultName: ${faultName},
 description: ${description},
 loading: ${loading},
+messageError: ${messageError},
+saveFeedback: ${saveFeedback},
 faultNameValid: ${faultNameValid},
 descriptionValid: ${descriptionValid},
 pressed: ${pressed}

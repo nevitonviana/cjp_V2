@@ -1,3 +1,4 @@
+import 'package:cjp_v2/screen/feedback/components/widgets/massage_save.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -25,12 +26,13 @@ class _FeedBackState extends State<FeedBack> {
             .error(context: context, error: _feedBackController.messageError!);
       }
     });
+    when((_) => _feedBackController.saveFeedback,
+        () => MassageDialog().save(context: context));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         title: const Text("FeedBack"),
       ),
