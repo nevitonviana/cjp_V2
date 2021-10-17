@@ -8,12 +8,13 @@ class RouteGenerate {
   static const String routeAccount = "/account";
   static const String routeHome = "/home";
   static const String routeAddOccurrence = "/addOccurrence";
+  static const String routeOccurrenceDetail = "/occurrenceDetail";
   static const String routeMyOccurrence = "/myOccurrence";
   static const String routeProfile = "/profile";
   static const String routeFeedback = "/feedBack";
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
-    // dynamic args = settings.arguments;
+     dynamic args = settings.arguments;
     switch (settings.name) {
       case "/":
         return MaterialPageRoute(
@@ -38,6 +39,10 @@ class RouteGenerate {
       case "/myOccurrence":
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
+        );
+        case "/occurrenceDetail":
+        return MaterialPageRoute(
+          builder: (context) =>  OccurrenceDetailScreen(occurrenceModel: args),
         );
       case "/profile":
         return MaterialPageRoute(
