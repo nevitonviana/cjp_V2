@@ -13,6 +13,7 @@ import 'components/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool myOccurrence;
+
   const HomeScreen({Key? key, this.myOccurrence = false}) : super(key: key);
 
   @override
@@ -113,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           context, RouteGenerate.routeProfile,
                                           arguments: occurrence)
                                       : Navigator.pushNamed(context,
-                                          RouteGenerate.routeAddOccurrence,
+                                          RouteGenerate.routeOccurrenceDetail,
                                           arguments: occurrence),
                                   child: CardCustom(
                                       occurrenceModel: occurrence,
