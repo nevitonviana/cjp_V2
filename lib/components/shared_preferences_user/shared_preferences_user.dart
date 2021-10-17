@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '/model/user/user.dart';
+import '/model/user/user_model.dart';
 
 class SharedPreferencesUser {
   preferences() async {}

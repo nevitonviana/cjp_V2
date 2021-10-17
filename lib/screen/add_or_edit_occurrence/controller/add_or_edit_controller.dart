@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 import '/components/controller/user_controller.dart';
-import '/model/occurrence/occurrence.dart';
+import '/model/occurrence/occurrence_model.dart';
 import '/repositories/occurrence/occurrence.dart';
 
 part 'add_or_edit_controller.g.dart';

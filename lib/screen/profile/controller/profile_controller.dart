@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
 import '/components/controller/user_controller.dart';
-import '/model/user/user.dart';
+import '/model/user/user_model.dart';
 import '/repositories/user/user.dart';
 
 part 'profile_controller.g.dart';

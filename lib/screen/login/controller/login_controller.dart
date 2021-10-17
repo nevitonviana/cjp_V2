@@ -1,4 +1,4 @@
-import 'package:cjp_v2/model/user/user.dart';
+import 'package:cjp_v2/model/user/user_model.dart';
 import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';

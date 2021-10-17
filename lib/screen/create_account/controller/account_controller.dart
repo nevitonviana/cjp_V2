@@ -2,7 +2,7 @@ import 'package:mobx/mobx.dart';
 
 import '/components/extensions/extensions.dart';
 import '/components/shared_preferences_user/shared_preferences_user.dart';
-import '/model/user/user.dart';
+import '/model/user/user_model.dart';
 import '/repositories/user/user.dart';
 
 part 'account_controller.g.dart';

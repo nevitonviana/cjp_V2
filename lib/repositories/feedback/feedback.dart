@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FeedBack {
+import '/model/feedback/feedback_model.dart';
+
+class FirebaseFeedBack {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  saveFeedback(AppFeedBack appFeedBack) async {
+  Future<void> saveFeedback(FeedBackModel appFeedBack) async {
     try {
-      _firestore.collection("Feedback_App").add(appFeedBack.toMap());
-      return true;
-    } catch (error) {
-      return false;
+      await _firestore.collection("Feedback_App").add(appFeedBack.toMap());
+    } catch (e) {
+      return Future.error("Não foi possível salvar e o FeedBack");
     }
   }

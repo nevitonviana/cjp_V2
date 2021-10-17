@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '/model/occurrence/occurrence.dart';
+import '/model/occurrence/occurrence_model.dart';
 
 class FirebaseOccurrence {
   // final FirebaseFirestore _db1 = FirebaseFirestore.instance;

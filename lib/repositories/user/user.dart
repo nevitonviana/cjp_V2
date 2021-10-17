@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '/model/user/user.dart';
+import '/model/user/user_model.dart';
 import '../firebase_error.dart';
 
 class FirebaseUser {
