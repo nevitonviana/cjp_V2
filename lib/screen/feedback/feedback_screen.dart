@@ -38,20 +38,20 @@ class _FeedBackState extends State<FeedBack> {
                       TextSpan(
                         style: Fonts.fontsAlfaslabOne,
                         children: const [
-                          TextSpan(text: "Caro amigos(as)\n"),
+                          TextSpan(text: "Caros(as) amigos(as)\n"),
                           TextSpan(
                               text:
-                                  "Obrigado por fazer parte desse teste 'BETA'\n"),
+                                  "Obrigado por fazer parte desse teste 'BETA'.\n"),
                           TextSpan(
                               text: "Use os Campos a baixor para enviar  \n"),
                           TextSpan(
-                              text: "A sua opinião, critica e elogio,  \n"),
+                              text: "A sua opinião, critica e elogio.  \n"),
                           TextSpan(
                               text:
-                                  "de grande importancia para que nos podemos evoluir,\n"),
+                                  "E de grande importancia para nos.\n Podemos evoluir,"),
                           TextSpan(
                               text:
-                                  "De tal forma que possamos lhe atender melhor... \n"),
+                                  " de tal forma que possamos lhe atender melhor... \n"),
                         ],
                       ),
                     ),

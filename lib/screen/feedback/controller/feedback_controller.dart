@@ -52,10 +52,21 @@ abstract class _FeedBackControllerBase with Store {
   @action
   void setLoading(bool value) => loading = value;
 
-  ///Button
-  @computed
-  dynamic get pressed => faultNameValid ? _feedback : null;
+  ///
+  @observable
+  String? messageError;
 
   @action
-  Future<void> _feedback() async {}
+  void setMessageError(String value) => messageError = value;
+
+  ///Button
+  @computed
+  dynamic get pressed => faultNameValid && descriptionValid ? _feedback : null;
+
+  @action
+  Future<void> _feedback() async {
+    try {} catch (e) {
+      return;
+    }
+  }
 }
