@@ -1,10 +1,17 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
+
+import '/components/controller/user_controller.dart';
+import '/model/feedback/feedback_model.dart';
+import '/repositories/feedback/feedback.dart';
 
 part 'feedback_controller.g.dart';
 
 class FeedBackController = _FeedBackControllerBase with _$FeedBackController;
 
 abstract class _FeedBackControllerBase with Store {
+  final UserController _userController = GetIt.I<UserController>();
+
   /// fault Name
   @observable
   String? faultName;
@@ -65,8 +72,18 @@ abstract class _FeedBackControllerBase with Store {
 
   @action
   Future<void> _feedback() async {
-    try {} catch (e) {
+    setLoading(true);
+    final FeedBackModel feedBackModel = FeedBackModel(
+      nameUser: _userController.user!.name,
+      faultName: faultName,
+      description: description,
+    );
+    try {
+      await FirebaseFeedBack().saveFeedback(feedBackModel: feedBackModel);
+    } catch (e) {
+      setMessageError(e.toString());
       return;
     }
+    setLoading(false);
   }
 }

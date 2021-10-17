@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
@@ -14,6 +15,17 @@ class FeedBack extends StatefulWidget {
 
 class _FeedBackState extends State<FeedBack> {
   final FeedBackController _feedBackController = FeedBackController();
+
+  @override
+  void initState() {
+    super.initState();
+    autorun((_) {
+      if (_feedBackController.messageError != null) {
+        ErrorDialog()
+            .error(context: context, error: _feedBackController.messageError!);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
