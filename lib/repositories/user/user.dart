@@ -33,7 +33,6 @@ class FirebaseUser {
     }
   }
 
-  //TODO credential
   Future<UserCredential?> signInCredential(
       {required AuthCredential credential}) async {
     try {

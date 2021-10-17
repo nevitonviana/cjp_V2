@@ -96,10 +96,14 @@ abstract class _LoginControllerBase with Store {
       final credential = await Facebook().signIn();
 
       if (credential != null) {
-        await FirebaseUser().signInCredential(credential: credential);
-        final _user = await Facebook().getInfoUser();
-        await _userController.saveInfoUserSharedPreferences(user: _user);
+        final id =
+            await FirebaseUser().signInCredential(credential: credential);
 
+        final _user = await Facebook().getInfoUser();
+
+        _user.id = id!.user!.uid;
+
+        await _userController.saveInfoUserSharedPreferences(user: _user);
         setLoginConfirmed(true);
       }
     } catch (e) {
@@ -111,25 +115,27 @@ abstract class _LoginControllerBase with Store {
 
   //signInGoogle
   Future signInGoogle() async {
-    Usuario usuario = Usuario();
+    Usuario _usuario = Usuario();
     try {
       final credential = await Google().signIn();
 
       final result =
           await FirebaseUser().signInCredential(credential: credential);
 
-      usuario.email = result!.user!.email!;
-      usuario.name = result.user!.displayName!;
-      usuario.photoUrl = result.user!.photoURL!;
-      usuario.isLogin = "google";
+      _usuario.id = result!.user!.uid;
+      _usuario.email = result.user!.email!;
+      _usuario.name = result.user!.displayName!;
+      _usuario.photoUrl = result.user!.photoURL!;
+      _usuario.isLogin = "google";
 
-      await _userController.saveInfoUserSharedPreferences(user: usuario);
+      await _userController.saveInfoUserSharedPreferences(user: _usuario);
 
       setLoginConfirmed(true);
     } catch (e) {
       setError(e.toString());
-      await Google().signOut();
+
       return;
     }
+    await Google().signOut();
   }
 }

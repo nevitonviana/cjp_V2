@@ -13,7 +13,7 @@ class FirebaseOccurrence {
 
   // final _collectionPath = "ocorrencias";
 
-  Future<void> saveOccurrence({required Occurrence occurrence}) async {
+  Future<void> saveOccurrence({required OccurrenceModel occurrence}) async {
     try {
       await _db.doc(occurrence.id).set(occurrence.toMap());
       return;
@@ -59,7 +59,7 @@ class FirebaseOccurrence {
     }
   }
 
-  Future<void> updateOccurrence({required Occurrence occurrence}) async {
+  Future<void> updateOccurrence({required OccurrenceModel occurrence}) async {
     try {
       await _db.doc(occurrence.id).set(occurrence.toMap());
       return;
@@ -70,7 +70,7 @@ class FirebaseOccurrence {
 
   Future<void> getOccurrence() async {}
 
-  Future<void> deleteOccurrence({required Occurrence occurrence}) async {
+  Future<void> deleteOccurrence({required OccurrenceModel occurrence}) async {
     try {
       if (await deletePhotoOccurrence(occurrence: occurrence)) {
         await _db.doc(occurrence.id).delete();
@@ -81,7 +81,7 @@ class FirebaseOccurrence {
     }
   }
 
-  deletePhotoOccurrence({required Occurrence occurrence}) async {
+  deletePhotoOccurrence({required OccurrenceModel occurrence}) async {
     Reference pastaRaiz = _storage.ref();
     try {
       for (var image in occurrence.photoReference!) {

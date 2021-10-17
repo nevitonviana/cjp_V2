@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Occurrence {
+class OccurrenceModel {
   String? id;
   String? idUser;
   String? nameOccurrence;
@@ -15,7 +15,7 @@ class Occurrence {
   bool status = false;
   List<String>? photoReference = [];
 
-  Occurrence({
+  OccurrenceModel({
     this.id,
     this.idUser,
     this.nameOccurrence,
@@ -49,7 +49,7 @@ class Occurrence {
     };
   }
 
-  Occurrence.update(Occurrence occurrence) {
+  OccurrenceModel.update(OccurrenceModel occurrence) {
     id = occurrence.id;
     idUser = occurrence.idUser;
     nameOccurrence = occurrence.nameOccurrence;
@@ -65,7 +65,7 @@ class Occurrence {
     photoReference = occurrence.photoReference;
   }
 
-  Occurrence.fromDocumentSnapshot(DocumentSnapshot snapshot) {
+  OccurrenceModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     id = snapshot.id;
     idUser = snapshot.get("idUser");
     nameOccurrence = snapshot.get("nomeOcorrencia");
@@ -81,7 +81,7 @@ class Occurrence {
     photoReference = List<String>.from(snapshot.get("referenciasFotos"));
   }
 
-  Occurrence.geraId() {
+  OccurrenceModel.geraId() {
     FirebaseFirestore _db = FirebaseFirestore.instance;
     CollectionReference idOccurrence = _db.collection("ocorrencias");
     id = idOccurrence.doc().id;

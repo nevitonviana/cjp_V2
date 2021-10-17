@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
 import '/components/controller/user_controller.dart';
-import '../../../../route_generate.dart';
+import '../../../../../route_generate.dart';
 import 'drawer_header_custom.dart';
 import 'menu_button_custom.dart';
 

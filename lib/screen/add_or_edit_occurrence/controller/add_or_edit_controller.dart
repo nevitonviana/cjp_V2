@@ -15,12 +15,12 @@ class AddOrEditController = _AddOrEditControllerBase with _$AddOrEditController;
 abstract class _AddOrEditControllerBase with Store {
   /// variables
   final UserController _userController = GetIt.I<UserController>();
-  late Occurrence occurrence;
+  late OccurrenceModel occurrence;
 
   _AddOrEditControllerBase() {
     city = _userController.user!.city;
     district = _userController.user!.district;
-    occurrence = Occurrence.geraId();
+    occurrence = OccurrenceModel.geraId();
   }
 
   /// field listImage
