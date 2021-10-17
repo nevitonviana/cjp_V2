@@ -9,7 +9,9 @@ class CardCustom extends StatelessWidget {
   final OccurrenceModel occurrenceModel;
   final bool myOccurrence;
 
-  const CardCustom({Key? key, required this.occurrenceModel, required this.myOccurrence}) : super(key: key);
+  const CardCustom(
+      {Key? key, required this.occurrenceModel, required this.myOccurrence})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,34 +78,36 @@ class CardCustom extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      // _dialogContext =
-                      //     context;
-                      // _deleteOcorrencia(
-                      //     ocorrencia);
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                        top: 6,
-                        left: 11,
-                      ),
-                      child: const Entry.offset(
-                        xOffset: 200,
-                        yOffset: 100,
-                        delay: Duration(seconds: 1),
-                        duration: Duration(milliseconds: 200),
-                        child: Icon(
-                          Icons.delete_forever,
-                          color: Colors.red,
-                          size: 35,
+                myOccurrence
+                    ? Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            // _dialogContext =
+                            //     context;
+                            // _deleteOcorrencia(
+                            //     ocorrencia);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                              top: 6,
+                              left: 11,
+                            ),
+                            child: const Entry.offset(
+                              xOffset: 200,
+                              yOffset: 100,
+                              delay: Duration(seconds: 1),
+                              duration: Duration(milliseconds: 200),
+                              child: Icon(
+                                Icons.delete_forever,
+                                color: Colors.red,
+                                size: 35,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                )
+                      )
+                    : Container(),
               ],
             ),
           ),

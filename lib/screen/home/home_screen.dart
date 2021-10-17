@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const CustomDrawer(),
+      drawer: widget.myOccurrence ? null : const CustomDrawer(),
       appBar: AppBar(
         title: const Text(
           "CJP",
@@ -110,8 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               return AnimatedCard(
                                 child: GestureDetector(
                                   onTap: () => widget.myOccurrence
-                                      ? Navigator.pushNamed(
-                                          context, RouteGenerate.routeProfile,
+                                      ? Navigator.pushNamed(context,
+                                          RouteGenerate.routeAddOccurrence,
                                           arguments: occurrence)
                                       : Navigator.pushNamed(context,
                                           RouteGenerate.routeOccurrenceDetail,
