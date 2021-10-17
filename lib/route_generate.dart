@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '/screen/screen.dart';
 
 class RouteGenerate {
-  static const String routeLogin = "/";
+  static const String routeSplash = "/";
+  static const String routeLogin = "/login";
   static const String routeAccount = "/account";
   static const String routeHome = "/home";
   static const String routeAddOccurrence = "/addOccurrence";
@@ -15,6 +16,10 @@ class RouteGenerate {
     // dynamic args = settings.arguments;
     switch (settings.name) {
       case "/":
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+        );
+      case "/login":
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         );
