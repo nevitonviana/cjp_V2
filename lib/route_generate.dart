@@ -14,7 +14,7 @@ class RouteGenerate {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     // dynamic args = settings.arguments;
     switch (settings.name) {
-      case "/home":
+      case "/":
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         );
@@ -22,7 +22,7 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (context) => const CreateAccountScreen(),
         );
-      case "/":
+      case "/home":
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
         );

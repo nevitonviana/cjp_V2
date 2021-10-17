@@ -27,13 +27,13 @@ mixin _$UserController on _UserControllerBase, Store {
   final _$loadingSingOutAtom = Atom(name: '_UserControllerBase.loadingSingOut');
 
   @override
-  bool? get loadingSingOut {
+  bool get loadingSingOut {
     _$loadingSingOutAtom.reportRead();
     return super.loadingSingOut;
   }
 
   @override
-  set loadingSingOut(bool? value) {
+  set loadingSingOut(bool value) {
     _$loadingSingOutAtom.reportWrite(value, super.loadingSingOut, () {
       super.loadingSingOut = value;
     });

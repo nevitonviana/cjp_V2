@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
+import '/components/controller/user_controller.dart';
 import '../../../../route_generate.dart';
 import 'drawer_header_custom.dart';
 import 'menu_button_custom.dart';
@@ -9,6 +12,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserController _userController = GetIt.I<UserController>();
     return ClipRRect(
       borderRadius: const BorderRadius.horizontal(
         right: Radius.circular(50),
@@ -48,11 +52,19 @@ class CustomDrawer extends StatelessWidget {
                 onTap: () =>
                     Navigator.pushNamed(context, RouteGenerate.routeFeedback),
               ),
-              const MenuButtonCustom(
-                // onTap: () => _signOut(),
-                text: "Sair",
-                icons: Icons.exit_to_app_outlined,
-              ),
+              Observer(builder: (_) {
+                return MenuButtonCustom(
+                  onTap: () async {
+                    await _userController.signOut();
+                    if (_userController.loadingSingOut) {
+                      Navigator.pushReplacementNamed(
+                          context, RouteGenerate.routeLogin);
+                    }
+                  },
+                  text: "Sair",
+                  icons: Icons.exit_to_app_outlined,
+                );
+              }),
             ],
           ),
         ),

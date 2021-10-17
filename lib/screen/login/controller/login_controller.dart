@@ -1,8 +1,9 @@
-import 'package:cjp_v2/model/user/user_model.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
+import '/components/controller/user_controller.dart';
 import '/components/extensions/extensions.dart';
-import '/components/shared_preferences_user/shared_preferences_user.dart';
+import '/model/user/user_model.dart';
 import '/repositories/social_login/social_login.dart';
 import '/repositories/user/user.dart';
 
@@ -11,6 +12,8 @@ part 'login_controller.g.dart';
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
+  final UserController _userController = GetIt.I<UserController>();
+
   // text field
   @observable
   String? email;
@@ -63,8 +66,8 @@ abstract class _LoginControllerBase with Store {
       await FirebaseUser()
           .signIn(email: email!.trim(), password: password!.trim())
           .then((value) async {
-        await SharedPreferencesUser()
-            .save(usuario: await FirebaseUser().getInfoUser());
+        await FirebaseUser().getInfoUser().then((value) async =>
+            await _userController.saveInfoUserSharedPreferences(user: value));
       });
       setLoginConfirmed(true);
     } catch (e) {
@@ -89,15 +92,14 @@ abstract class _LoginControllerBase with Store {
 
   //signInFacebook
   Future signInFacebook() async {
-    Usuario usuario = Usuario();
     try {
-      final result = await Facebook().signIn();
-      if (result?.user != null) {
-        usuario.email = result!.user!.email!;
-        usuario.name = result.user!.displayName!;
-        usuario.photoUrl = result.user!.photoURL!;
-        usuario.isLogin = "facebook";
-        await SharedPreferencesUser().save(usuario: usuario);
+      final credential = await Facebook().signIn();
+
+      if (credential != null) {
+        await FirebaseUser().signInCredential(credential: credential);
+        final _user = await Facebook().getInfoUser();
+        await _userController.saveInfoUserSharedPreferences(user: _user);
+
         setLoginConfirmed(true);
       }
     } catch (e) {
@@ -111,12 +113,18 @@ abstract class _LoginControllerBase with Store {
   Future signInGoogle() async {
     Usuario usuario = Usuario();
     try {
-      final result = await Google().signIn();
+      final credential = await Google().signIn();
+
+      final result =
+          await FirebaseUser().signInCredential(credential: credential);
+
       usuario.email = result!.user!.email!;
       usuario.name = result.user!.displayName!;
       usuario.photoUrl = result.user!.photoURL!;
       usuario.isLogin = "google";
-      await SharedPreferencesUser().save(usuario: usuario);
+
+      await _userController.saveInfoUserSharedPreferences(user: usuario);
+
       setLoginConfirmed(true);
     } catch (e) {
       setError(e.toString());

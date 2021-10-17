@@ -16,14 +16,14 @@ class _HomeScreenState extends State<HomeScreen> {
   String a = "teste";
   int b = 1236;
 
-  aa() {
-    _controller.user?.isLogin == "firebase"
-        ? print("145236")
-        : print("111111111");
-
-    _controller.user!.isLogin.contains("firebase")
-        ? print("ttt145236")
-        : print("tttt111111111");
+  aa() async {
+    // _controller.user?.isLogin == "firebase"
+    //     ? print("145236")
+    //     : print("111111111");
+    //
+    // _controller.user!.isLogin.contains("firebase")
+    //     ? print("ttt145236")
+    //     : print("tttt111111111");
   }
 
   @override

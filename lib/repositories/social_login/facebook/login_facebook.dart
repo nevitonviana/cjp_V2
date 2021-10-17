@@ -1,10 +1,9 @@
+import 'package:cjp_v2/model/user/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-import '/repositories/user/user.dart';
-
 class Facebook {
-  Future<UserCredential?> signIn() async {
+  Future<OAuthCredential?> signIn() async {
     try {
       final LoginResult loginResult = await FacebookAuth.instance
           .login(permissions: ["public_profile", "email"]);
@@ -13,8 +12,7 @@ class Facebook {
         case LoginStatus.success:
           final OAuthCredential facebookAuthCredential =
               FacebookAuthProvider.credential(loginResult.accessToken!.token);
-          return await FirebaseUser()
-              .signInCredential(credential: facebookAuthCredential);
+          return facebookAuthCredential;
         case LoginStatus.cancelled:
           return null;
         case LoginStatus.failed:
@@ -31,7 +29,13 @@ class Facebook {
     await FacebookAuth.i.logOut();
   }
 
-  Future getInfoUser() async {
-    return await FacebookAuth.instance.getUserData();
+  Future<Usuario> getInfoUser() async {
+    Usuario _user = Usuario();
+    final result = await FacebookAuth.instance.getUserData();
+    _user.name = result['name'];
+    _user.email = result['email'];
+    _user.photoUrl = result['picture']['data']['url'];
+    _user.isLogin = "facebook";
+    return _user;
   }
 }

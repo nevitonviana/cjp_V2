@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../user/user.dart';
-
 class Google {
   final GoogleSignIn _googleUser = GoogleSignIn(
     scopes: [
@@ -11,8 +9,7 @@ class Google {
     ],
   );
 
-  //TODO credential
-  Future<UserCredential?> signIn() async {
+  Future<OAuthCredential> signIn() async {
     try {
       final _user = await _googleUser.signIn();
 
@@ -23,8 +20,7 @@ class Google {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-
-      return await FirebaseUser().signInCredential(credential: credential);
+      return credential;
     } catch (e) {
       return Future.error(e);
     }
@@ -32,9 +28,5 @@ class Google {
 
   Future<void> signOut() async {
     await _googleUser.signOut();
-  }
-
-  Future getInfoUser() async {
-    return _googleUser.currentUser;
   }
 }

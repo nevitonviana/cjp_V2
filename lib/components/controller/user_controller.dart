@@ -1,9 +1,9 @@
-import 'package:cjp_v2/repositories/social_login/google/login_google.dart';
-import 'package:cjp_v2/repositories/social_login/social_login.dart';
-import 'package:cjp_v2/repositories/user/user.dart';
 import 'package:mobx/mobx.dart';
 
 import '/model/user/user_model.dart';
+import '/repositories/social_login/google/login_google.dart';
+import '/repositories/social_login/social_login.dart';
+import '/repositories/user/user.dart';
 import '../shared_preferences_user/shared_preferences_user.dart';
 
 part 'user_controller.g.dart';
@@ -44,9 +44,9 @@ abstract class _UserControllerBase with Store {
     await _preferencesUser.remove();
   }
 
-  ///
+  ///loading SingOut
   @observable
-  bool? loadingSingOut = false;
+  bool loadingSingOut = false;
 
   @action
   void setLoadingSingOut(bool value) => loadingSingOut = value;
