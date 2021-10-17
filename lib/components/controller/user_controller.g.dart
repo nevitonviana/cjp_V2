@@ -24,6 +24,21 @@ mixin _$UserController on _UserControllerBase, Store {
     });
   }
 
+  final _$loadingSingOutAtom = Atom(name: '_UserControllerBase.loadingSingOut');
+
+  @override
+  bool? get loadingSingOut {
+    _$loadingSingOutAtom.reportRead();
+    return super.loadingSingOut;
+  }
+
+  @override
+  set loadingSingOut(bool? value) {
+    _$loadingSingOutAtom.reportWrite(value, super.loadingSingOut, () {
+      super.loadingSingOut = value;
+    });
+  }
+
   final _$saveInfoUserSharedPreferencesAsyncAction =
       AsyncAction('_UserControllerBase.saveInfoUserSharedPreferences');
 
@@ -31,6 +46,22 @@ mixin _$UserController on _UserControllerBase, Store {
   Future<void> saveInfoUserSharedPreferences({required Usuario user}) {
     return _$saveInfoUserSharedPreferencesAsyncAction
         .run(() => super.saveInfoUserSharedPreferences(user: user));
+  }
+
+  final _$deleteInfoUserSharedPreferencesAsyncAction =
+      AsyncAction('_UserControllerBase.deleteInfoUserSharedPreferences');
+
+  @override
+  Future<void> deleteInfoUserSharedPreferences() {
+    return _$deleteInfoUserSharedPreferencesAsyncAction
+        .run(() => super.deleteInfoUserSharedPreferences());
+  }
+
+  final _$signOutAsyncAction = AsyncAction('_UserControllerBase.signOut');
+
+  @override
+  Future<void> signOut() {
+    return _$signOutAsyncAction.run(() => super.signOut());
   }
 
   final _$_UserControllerBaseActionController =
@@ -48,9 +79,21 @@ mixin _$UserController on _UserControllerBase, Store {
   }
 
   @override
+  void setLoadingSingOut(bool value) {
+    final _$actionInfo = _$_UserControllerBaseActionController.startAction(
+        name: '_UserControllerBase.setLoadingSingOut');
+    try {
+      return super.setLoadingSingOut(value);
+    } finally {
+      _$_UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-user: ${user}
+user: ${user},
+loadingSingOut: ${loadingSingOut}
     ''';
   }
 }
