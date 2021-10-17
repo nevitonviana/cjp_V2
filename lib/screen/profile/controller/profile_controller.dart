@@ -17,8 +17,6 @@ abstract class _ProfileControllerBase with Store {
   Usuario _user = Usuario();
 
   _ProfileControllerBase() {
-    _userController.user!.photoUrl =
-        "https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg";
     name = _userController.user!.name;
     district = _userController.user!.district;
     city = _userController.user!.city;
