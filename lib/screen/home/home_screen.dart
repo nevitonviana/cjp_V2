@@ -38,8 +38,23 @@ class _HomeScreenState extends State<HomeScreen> {
     return _controllerStream.stream;
   }
 
+  _aaa() {
+    List b = [1111, 222, 1];
+    List c = [4444, 555, 1];
+    List v = [];
+    print(999999999999);
+    print(b);
+    print(c);
+    v.addAll(b);
+    b.removeAt(2);
+    b.addAll(v);
+    print("tttttt");
+    print(b);
+  }
+
   @override
   void initState() {
+    _aaa();
     super.initState();
     _getOccurrence();
   }
@@ -111,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: GestureDetector(
                                   onTap: () => widget.myOccurrence
                                       ? Navigator.pushNamed(context,
-                                          RouteGenerate.routeAddOccurrence,
+                                          RouteGenerate.routeEditOccurrence,
                                           arguments: occurrence)
                                       : Navigator.pushNamed(context,
                                           RouteGenerate.routeOccurrenceDetail,

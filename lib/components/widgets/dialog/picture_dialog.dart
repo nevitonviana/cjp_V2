@@ -7,8 +7,10 @@ import '/screen/add_or_edit_occurrence/controller/add_or_edit_controller.dart';
 class PictureDialog {
   fullPicture({
     required BuildContext context,
-    required File image,
+    required dynamic image,
     AddOrEditController? addOrEditController,
+    String? imageReference,
+    String? id,
   }) {
     showDialog(
       context: context,
@@ -20,10 +22,12 @@ class PictureDialog {
             Stack(
               children: [
                 Positioned.fill(
-                  child: Image.file(
-                    File(image.path),
-                    fit: BoxFit.cover,
-                  ),
+                  child: image.runtimeType != String
+                      ? Image.file(
+                          File(image.path),
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(image),
                 ),
                 const Align(
                   child: CloseButton(color: Colors.white),
@@ -33,9 +37,14 @@ class PictureDialog {
             ),
             Visibility(
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  if (imageReference != null) {
+                    await addOrEditController!.deleteImageInFirebase(
+                        photoReference: imageReference, id: id!, image: image);
+                  }
                   addOrEditController!.listImage
                       .removeWhere((element) => element == image);
+
                   Navigator.pop(context);
                 },
                 child: const Text("Excluir"),

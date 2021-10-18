@@ -10,6 +10,7 @@ class RouteGenerate {
   static const String routeAddOccurrence = "/addOccurrence";
   static const String routeOccurrenceDetail = "/occurrenceDetail";
   static const String routeMyOccurrence = "/myOccurrence";
+  static const String routeEditOccurrence = "/editOccurrence";
   static const String routeProfile = "/profile";
   static const String routeFeedback = "/feedBack";
 
@@ -41,6 +42,10 @@ class RouteGenerate {
           builder: (context) => const HomeScreen(
             myOccurrence: true,
           ),
+        );
+      case "/editOccurrence":
+        return MaterialPageRoute(
+          builder: (context) => AddOrEditOccurrence(occurrenceModel: args),
         );
       case "/occurrenceDetail":
         return MaterialPageRoute(

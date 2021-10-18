@@ -17,10 +17,21 @@ abstract class _AddOrEditControllerBase with Store {
   final UserController _userController = GetIt.I<UserController>();
   late OccurrenceModel occurrence;
 
-  _AddOrEditControllerBase() {
-    city = _userController.user!.city;
-    district = _userController.user!.district;
-    occurrence = OccurrenceModel.geraId();
+  _AddOrEditControllerBase({OccurrenceModel? occurrenceModel}) {
+    if (occurrenceModel == null) {
+      city = _userController.user!.city;
+      district = _userController.user!.district;
+      occurrence = OccurrenceModel.geraId();
+      occurrence.hour = DateTime.now().toString();
+    } else {
+      occurrence = occurrenceModel;
+      listImage.addAll(occurrenceModel.listPhotos!);
+      city = occurrenceModel.city!;
+      district = occurrenceModel.district!;
+      road = occurrenceModel.road!;
+      nameOccurrence = occurrenceModel.nameOccurrence!;
+      discretion = occurrenceModel.description!;
+    }
   }
 
   /// field listImage
@@ -177,24 +188,46 @@ abstract class _AddOrEditControllerBase with Store {
       ? _addOrEditOccurrence
       : null;
 
+  ///loading
   @observable
   bool loading = false;
 
   @action
   void setLoading(bool value) => loading = value;
 
+  ///massage error
   @observable
   String? massageError;
 
   @action
   void setMassageError(String value) => massageError = value;
 
+  ///save occurrence
   @observable
   bool save = false;
 
   @action
   void setSave(bool value) => save = value;
 
+  ///delete image in firebase
+  @action
+  Future<void> deleteImageInFirebase(
+      {required String photoReference,
+      required String id,
+      required String image}) async {
+    try {
+      await FirebaseOccurrence()
+          .deletePhotoOccurrence(id: id, photoReference: [photoReference]);
+      occurrence.photoReference!
+          .removeWhere((element) => element == photoReference);
+      occurrence.listPhotos!.removeWhere((element) => element == image);
+    } catch (e) {
+      setMassageError(e.toString());
+      return;
+    }
+  }
+
+  /// add occurrence in firebase
   @action
   Future<void> _addOrEditOccurrence() async {
     loading = true;
@@ -205,14 +238,13 @@ abstract class _AddOrEditControllerBase with Store {
     occurrence.road = road;
     occurrence.nameOccurrence = nameOccurrence;
     occurrence.description = discretion;
-    occurrence.hour = DateTime.now().toString();
 
     try {
       await FirebaseOccurrence()
           .savaImageStorage(listImage: listImage, idOccurrence: occurrence.id!)
           .then((value) async {
-        occurrence.listPhotos = value["listUrl"];
-        occurrence.photoReference = value["listReference"];
+        occurrence.listPhotos!.addAll(value["listUrl"]);
+        occurrence.photoReference!.addAll(value["listReference"]);
         await FirebaseOccurrence()
             .saveOccurrence(occurrence: occurrence)
             .then((value) => setSave(true));

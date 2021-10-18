@@ -26,18 +26,27 @@ class ShowSelectedImage extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () => PictureDialog().fullPicture(
-                    context: context,
-                    image: addOrEditController.listImage[index],
-                    addOrEditController: addOrEditController),
+                  context: context,
+                  image: addOrEditController.listImage[index],
+                  addOrEditController: addOrEditController,
+                  id: addOrEditController.occurrence.id,
+                  imageReference:
+                      addOrEditController.occurrence.photoReference?[index],
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: CircleAvatar(
                     radius: 60,
-                    backgroundImage: FileImage(
-                      File(
-                        addOrEditController.listImage[index].path,
-                      ),
-                    ),
+                    backgroundImage:
+                        addOrEditController.listImage[index].runtimeType ==
+                                String
+                            ? NetworkImage(addOrEditController.listImage[index])
+                                as ImageProvider
+                            : FileImage(
+                                File(
+                                  addOrEditController.listImage[index].path,
+                                ),
+                              ),
                     child: Container(
                       color: Colors.white.withOpacity(0.5),
                       child: const Icon(

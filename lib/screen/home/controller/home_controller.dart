@@ -1,7 +1,7 @@
-import 'package:cjp_v2/repositories/occurrence/occurrence.dart';
 import 'package:mobx/mobx.dart';
 
 import '/model/occurrence/occurrence_model.dart';
+import '/repositories/occurrence/occurrence.dart';
 
 part 'home_controller.g.dart';
 

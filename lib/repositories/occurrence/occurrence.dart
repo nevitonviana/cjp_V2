@@ -27,31 +27,33 @@ class FirebaseOccurrence {
     required String idOccurrence,
   }) async {
     FirebaseStorage firebaseStorage = FirebaseStorage.instance;
-    Reference folderSource = firebaseStorage.ref();
+    Reference _rootFolder = firebaseStorage.ref();
     List<String> listReference = [];
     List<String> listUrl = [];
     try {
       for (var _image in listImage) {
         String _nameImage = DateTime.now().millisecondsSinceEpoch.toString();
 
-        Reference folder = folderSource
-            .child("imagens_Ocorrencias")
-            .child(idOccurrence)
-            .child(_nameImage);
+        if (_image.runtimeType != String) {
+          Reference _file = _rootFolder
+              .child("imagens_Ocorrencias")
+              .child(idOccurrence)
+              .child(_nameImage);
 
-        UploadTask uploadTask = folder.putFile(_image as File);
+          UploadTask uploadTask = _file.putFile(_image as File);
 
-        uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
-          if (taskSnapshot.state == TaskState.success) {}
-        });
+          uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
+            if (taskSnapshot.state == TaskState.success) {}
+          });
 
-        final get = await uploadTask.whenComplete(() {});
+          final get = await uploadTask.whenComplete(() {});
 
-        String url = await get.ref.getDownloadURL();
+          String url = await get.ref.getDownloadURL();
 
-        listReference.add(_nameImage);
+          listReference.add(_nameImage);
 
-        listUrl.add(url);
+          listUrl.add(url);
+        }
       }
       return {"listReference": listReference, "listUrl": listUrl};
     } catch (e) {
@@ -59,20 +61,12 @@ class FirebaseOccurrence {
     }
   }
 
-  Future<void> updateOccurrence({required OccurrenceModel occurrence}) async {
-    try {
-      await _db.doc(occurrence.id).set(occurrence.toMap());
-      return;
-    } catch (e) {
-      return;
-    }
-  }
-
   Future<void> getOccurrence() async {}
 
   Future<void> deleteOccurrence({required OccurrenceModel occurrence}) async {
     try {
-      if (await deletePhotoOccurrence(occurrence: occurrence)) {
+      if (await deletePhotoOccurrence(
+          id: occurrence.id!, photoReference: occurrence.photoReference!)) {
         await _db.doc(occurrence.id).delete();
       }
       return;
@@ -81,19 +75,18 @@ class FirebaseOccurrence {
     }
   }
 
-  deletePhotoOccurrence({required OccurrenceModel occurrence}) async {
-    Reference pastaRaiz = _storage.ref();
+  deletePhotoOccurrence(
+      {required List photoReference, required String id}) async {
+    Reference _rootFolder = _storage.ref();
     try {
-      for (var image in occurrence.photoReference!) {
-        Reference arquivo = pastaRaiz
-            .child("imagens_Ocorrencias")
-            .child(occurrence.id!)
-            .child(image);
-        arquivo.delete();
+      for (var image in photoReference) {
+        Reference _file =
+            _rootFolder.child("imagens_Ocorrencias").child(id).child(image);
+        _file.delete();
       }
       return true;
-    } catch (erro) {
-      return false;
+    } catch (e) {
+      return Future.error(e);
     }
   }
 }

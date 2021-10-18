@@ -5,21 +5,26 @@ import 'package:mobx/mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
+import '/model/occurrence/occurrence_model.dart';
 import 'components/widgets/show_selected_image.dart';
 import 'controller/add_or_edit_controller.dart';
 
 class AddOrEditOccurrence extends StatefulWidget {
-  const AddOrEditOccurrence({Key? key}) : super(key: key);
+  final OccurrenceModel? occurrenceModel;
+
+  const AddOrEditOccurrence({Key? key, this.occurrenceModel}) : super(key: key);
 
   @override
   State<AddOrEditOccurrence> createState() => _AddOrEditOccurrenceState();
 }
 
 class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
-  final AddOrEditController _addOrEditController = AddOrEditController();
+  late final AddOrEditController _addOrEditController;
 
   @override
   void initState() {
+    _addOrEditController =
+        AddOrEditController(occurrenceModel: widget.occurrenceModel);
     super.initState();
     autorun((_) {
       if (_addOrEditController.loading) {
@@ -105,6 +110,7 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                         Observer(builder: (_) {
                           return _addOrEditController.city.isEmpty
                               ? TextFieldCustom(
+                                  initialValue: _addOrEditController.city,
                                   onChanged: _addOrEditController.setCity,
                                   errorText: _addOrEditController.cityError,
                                   label: "Cidade",
@@ -121,6 +127,7 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                         }),
                         Observer(builder: (_) {
                           return TextFieldCustom(
+                            initialValue: _addOrEditController.road,
                             onChanged: _addOrEditController.setRoad,
                             errorText: _addOrEditController.roadError,
                             label: "Av/Rua",
@@ -128,6 +135,7 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                         }),
                         Observer(builder: (_) {
                           return TextFieldCustom(
+                            initialValue: _addOrEditController.nameOccurrence,
                             onChanged: _addOrEditController.setNameOccurrence,
                             errorText: _addOrEditController.nameOccurrenceError,
                             label: "Nome da Ocorrencia",
@@ -135,6 +143,7 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
                         }),
                         Observer(builder: (_) {
                           return TextFieldCustom(
+                            initialValue: _addOrEditController.discretion,
                             onChanged: _addOrEditController.setDiscretion,
                             errorText: _addOrEditController.discretionError,
                             label: "Descrição",

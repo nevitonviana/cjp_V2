@@ -1,7 +1,7 @@
-import 'package:cjp_v2/model/occurrence/occurrence_model.dart';
 import 'package:flutter/material.dart';
 
 import '/components/theme/font/fonts.dart';
+import '/model/occurrence/occurrence_model.dart';
 import '/screen/home/controller/home_controller.dart';
 
 class DeleteDialog {
