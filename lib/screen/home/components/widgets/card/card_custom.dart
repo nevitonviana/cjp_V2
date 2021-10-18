@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cjp_v2/components/widgets/widgets.dart';
 import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/model/occurrence/occurrence_model.dart';
+import '../../../controller/home_controller.dart';
 
 class CardCustom extends StatelessWidget {
   final OccurrenceModel occurrenceModel;
@@ -15,6 +17,7 @@ class CardCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeController _homeController = HomeController();
     return Card(
       color: Colors.grey.shade400,
       shadowColor: occurrenceModel.status ? Colors.green : Colors.red,
@@ -82,12 +85,10 @@ class CardCustom extends StatelessWidget {
                     ? Align(
                         alignment: Alignment.topRight,
                         child: GestureDetector(
-                          onTap: () {
-                            // _dialogContext =
-                            //     context;
-                            // _deleteOcorrencia(
-                            //     ocorrencia);
-                          },
+                          onTap: () => DeleteDialog().delete(
+                              context: context,
+                              occurrenceModel: occurrenceModel,
+                              homeController: _homeController),
                           child: Container(
                             margin: const EdgeInsets.only(
                               top: 6,
