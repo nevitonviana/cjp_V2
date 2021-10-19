@@ -196,6 +196,22 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
     });
   }
 
+  final _$imageModificationAtom =
+      Atom(name: '_AddOrEditControllerBase.imageModification');
+
+  @override
+  bool get imageModification {
+    _$imageModificationAtom.reportRead();
+    return super.imageModification;
+  }
+
+  @override
+  set imageModification(bool value) {
+    _$imageModificationAtom.reportWrite(value, super.imageModification, () {
+      super.imageModification = value;
+    });
+  }
+
   final _$getImageGalleryAsyncAction =
       AsyncAction('_AddOrEditControllerBase.getImageGallery');
 
@@ -212,13 +228,22 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
     return _$getImageCameraAsyncAction.run(() => super.getImageCamera());
   }
 
-  final _$_addOrEditOccurrenceAsyncAction =
-      AsyncAction('_AddOrEditControllerBase._addOrEditOccurrence');
+  final _$deleteImageInFirebaseAsyncAction =
+      AsyncAction('_AddOrEditControllerBase.deleteImageInFirebase');
 
   @override
-  Future<void> _addOrEditOccurrence() {
-    return _$_addOrEditOccurrenceAsyncAction
-        .run(() => super._addOrEditOccurrence());
+  Future<void> deleteImageInFirebase({required int index}) {
+    return _$deleteImageInFirebaseAsyncAction
+        .run(() => super.deleteImageInFirebase(index: index));
+  }
+
+  final _$addOrEditOccurrenceAsyncAction =
+      AsyncAction('_AddOrEditControllerBase.addOrEditOccurrence');
+
+  @override
+  Future<void> addOrEditOccurrence() {
+    return _$addOrEditOccurrenceAsyncAction
+        .run(() => super.addOrEditOccurrence());
   }
 
   final _$_AddOrEditControllerBaseActionController =
@@ -324,6 +349,17 @@ mixin _$AddOrEditController on _AddOrEditControllerBase, Store {
   }
 
   @override
+  void setImageModification(bool value) {
+    final _$actionInfo = _$_AddOrEditControllerBaseActionController.startAction(
+        name: '_AddOrEditControllerBase.setImageModification');
+    try {
+      return super.setImageModification(value);
+    } finally {
+      _$_AddOrEditControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 city: ${city},
@@ -335,6 +371,7 @@ showErrors: ${showErrors},
 loading: ${loading},
 massageError: ${massageError},
 save: ${save},
+imageModification: ${imageModification},
 imageValid: ${imageValid},
 cityValid: ${cityValid},
 districtValid: ${districtValid},

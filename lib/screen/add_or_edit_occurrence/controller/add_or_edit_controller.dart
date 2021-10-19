@@ -185,7 +185,7 @@ abstract class _AddOrEditControllerBase with Store {
           roadValid &&
           nameOccurrenceValid &&
           discretionValid
-      ? _addOrEditOccurrence
+      ? addOrEditOccurrence
       : null;
 
   ///loading
@@ -212,6 +212,7 @@ abstract class _AddOrEditControllerBase with Store {
   ///delete image in firebase
   @action
   Future<void> deleteImageInFirebase({required int index}) async {
+    setImageModification(true);
     try {
       await FirebaseOccurrence().deletePhotoOccurrence(
           id: occurrence.id!,
@@ -226,7 +227,7 @@ abstract class _AddOrEditControllerBase with Store {
 
   /// add occurrence in firebase
   @action
-  Future<void> _addOrEditOccurrence() async {
+  Future<void> addOrEditOccurrence() async {
     loading = true;
 
     occurrence.idUser = _userController.user!.id;
@@ -252,4 +253,10 @@ abstract class _AddOrEditControllerBase with Store {
     }
     loading = false;
   }
+
+  @observable
+  bool imageModification = false;
+
+  @action
+  void setImageModification(bool value) => imageModification = value;
 }

@@ -50,6 +50,16 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Adicionar Ocorrencia"),
+        leading: BackButton(
+          onPressed: () async {
+            if (_addOrEditController.imageModification) {
+              print(3214566);
+              await _addOrEditController.addOrEditOccurrence();
+            }
+            Navigator.of(context).pop();
+          },
+          color: Colors.black,
+        ),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
