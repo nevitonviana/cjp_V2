@@ -1,10 +1,10 @@
 import 'package:animated_card/animated_card.dart';
-import 'package:cjp_v2/route_generate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
 import '/components/widgets/widgets.dart';
+import '/route_generate.dart';
 import 'controller/login_controller.dart';
 import 'widgets/widgets.dart';
 

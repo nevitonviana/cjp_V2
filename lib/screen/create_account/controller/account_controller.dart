@@ -1,7 +1,8 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
+import '/components/controller/user_controller.dart';
 import '/components/extensions/extensions.dart';
-import '/components/shared_preferences_user/shared_preferences_user.dart';
 import '/model/user/user_model.dart';
 import '/repositories/user/user.dart';
 
@@ -11,6 +12,7 @@ class AccountController = _AccountControllerBase with _$AccountController;
 
 abstract class _AccountControllerBase with Store {
   final _field = 'Este campo é obrigatório';
+  final UserController _userController = GetIt.I<UserController>();
 
   ///name
   @observable
@@ -169,7 +171,7 @@ abstract class _AccountControllerBase with Store {
           .createUser(email: email!, password: password!)
           .then((value) async {
         Usuario? _result = await FirebaseUser().saveInfoUser(usuario: _usuario);
-        await SharedPreferencesUser().save(usuario: _result!);
+        await _userController.saveInfoUserSharedPreferences(user: _result!);
       });
     } catch (e) {
       setErrorMessage(e.toString());

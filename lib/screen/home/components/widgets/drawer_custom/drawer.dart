@@ -54,14 +54,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   RouteGenerate.routeMyOccurrence,
                 ),
               ),
-              MenuButtonCustom(
-                text: "Perfil",
-                icons: Icons.person,
-                onTap: () => Navigator.pushNamed(
-                  context,
-                  RouteGenerate.routeProfile,
+              if (_userController.user!.isLogin == "firebase")
+                MenuButtonCustom(
+                  text: "Perfil",
+                  icons: Icons.person,
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    RouteGenerate.routeProfile,
+                  ),
                 ),
-              ),
               MenuButtonCustom(
                 text: "FeedBack",
                 icons: Icons.feedback_outlined,

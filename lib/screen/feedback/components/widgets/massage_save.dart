@@ -1,6 +1,7 @@
-import 'package:cjp_v2/components/theme/font/fonts.dart';
-import 'package:cjp_v2/route_generate.dart';
 import 'package:flutter/material.dart';
+
+import '/components/theme/font/fonts.dart';
+import '/route_generate.dart';
 
 class MassageDialog {
   save({

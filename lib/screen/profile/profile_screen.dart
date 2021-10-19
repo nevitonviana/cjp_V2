@@ -48,86 +48,98 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 4,
         centerTitle: true,
       ),
-      body: LayoutBuilder(builder: (context, constraints) {
-        return Align(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                PhotoProfile(
-                  height: constraints.maxHeight,
-                  profileController: profileController,
-                ),
-                Divider(
-                  height: constraints.maxHeight * 0.03,
-                  color: Colors.transparent,
-                ),
-                Observer(builder: (_) {
-                  return TextFieldCustom(
-                    initialValue: profileController.name,
-                    onChanged: profileController.setName,
-                    errorText: profileController.nameError,
-                    label: "Nome",
-                  );
-                }),
-                Observer(builder: (_) {
-                  return TextFieldCustom(
-                    initialValue: profileController.district,
-                    onChanged: profileController.setDistrict,
-                    errorText: profileController.districtError,
-                    label: "Bairro",
-                  );
-                }),
-                Observer(builder: (_) {
-                  return TextFieldCustom(
-                    initialValue: profileController.city,
-                    onChanged: profileController.setCity,
-                    errorText: profileController.cityError,
-                    label: "Cidade",
-                  );
-                }),
-                Divider(
-                  height: constraints.maxHeight * 0.04,
-                ),
-                Observer(builder: (_) {
-                  return profileController.imageError != null
-                      ? Container(
-                          margin: EdgeInsets.only(
-                              bottom: constraints.maxHeight * 0.03),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Align(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  PhotoProfile(
+                    height: constraints.maxHeight,
+                    profileController: profileController,
+                  ),
+                  Divider(
+                    height: constraints.maxHeight * 0.03,
+                    color: Colors.transparent,
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return TextFieldCustom(
+                        initialValue: profileController.name,
+                        onChanged: profileController.setName,
+                        errorText: profileController.nameError,
+                        label: "Nome",
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return TextFieldCustom(
+                        initialValue: profileController.district,
+                        onChanged: profileController.setDistrict,
+                        errorText: profileController.districtError,
+                        label: "Bairro",
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return TextFieldCustom(
+                        initialValue: profileController.city,
+                        onChanged: profileController.setCity,
+                        errorText: profileController.cityError,
+                        label: "Cidade",
+                      );
+                    },
+                  ),
+                  Divider(
+                    height: constraints.maxHeight * 0.04,
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return profileController.imageError != null
+                          ? Container(
+                              margin: EdgeInsets.only(
+                                  bottom: constraints.maxHeight * 0.03),
+                              child: Text(
+                                profileController.imageError!,
+                                style: const TextStyle(
+                                    color: Colors.red, fontSize: 15),
+                              ),
+                            )
+                          : Container();
+                    },
+                  ),
+                  InkWell(
+                    onTap: profileController.invalidSendPressed,
+                    child: Observer(
+                      builder: (_) {
+                        return MaterialButton(
+                          onPressed: profileController.profilePressed,
                           child: Text(
-                            profileController.imageError!,
-                            style: const TextStyle(
-                                color: Colors.red, fontSize: 15),
+                            "Enviar",
+                            style: Fonts.fontsRoboto,
                           ),
-                        )
-                      : Container();
-                }),
-                InkWell(
-                  onTap: profileController.invalidSendPressed,
-                  child: Observer(builder: (_) {
-                    return MaterialButton(
-                      onPressed: profileController.profilePressed,
-                      child: Text(
-                        "Enviar",
-                        style: Fonts.fontsRoboto,
-                      ),
-                      color: Colors.blueGrey,
-                      elevation: 6,
-                      minWidth: constraints.maxWidth * 0.45,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      disabledColor: Colors.grey,
-                      disabledElevation: 1,
-                    );
-                  }),
-                ),
-                const Divider(height: 30),
-              ],
+                          color: Colors.blueGrey,
+                          elevation: 6,
+                          minWidth: constraints.maxWidth * 0.45,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          disabledColor: Colors.grey,
+                          disabledElevation: 1,
+                        );
+                      },
+                    ),
+                  ),
+                  const Divider(height: 30),
+                ],
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

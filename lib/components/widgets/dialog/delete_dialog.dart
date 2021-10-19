@@ -34,7 +34,7 @@ class DeleteDialog {
                 padding: const EdgeInsets.symmetric(vertical: 60),
                 child: Text.rich(
                   TextSpan(
-                    text: "Você que quer Excluir \n\n",
+                    text: "Você quer excluir \n\n",
                     style: const TextStyle(fontSize: 15),
                     children: [
                       TextSpan(

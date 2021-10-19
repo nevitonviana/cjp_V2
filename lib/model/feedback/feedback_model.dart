@@ -3,7 +3,11 @@ class FeedBackModel {
   String? faultName;
   String? description;
 
-  FeedBackModel({this.nameUser, this.faultName, this.description});
+  FeedBackModel({
+    this.nameUser,
+    this.faultName,
+    this.description,
+  });
 
   Map<String, dynamic> toMap() {
     return {

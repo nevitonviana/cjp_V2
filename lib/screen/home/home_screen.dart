@@ -29,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Query query = _db.collection("ocorrencias");
     if (widget.myOccurrence) {
       query = query.where("idUser", isEqualTo: _userController.user!.id);
+    } else {
+      query = query.where("visivel", isEqualTo: true);
     }
 
     Stream<QuerySnapshot> stream = query.snapshots();
@@ -38,23 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return _controllerStream.stream;
   }
 
-  // _aaa() {
-  //   List b = [1111, 222, 1];
-  //   List c = [4444, 555, 1];
-  //   List v = [];
-  //   print(999999999999);
-  //   print(b);
-  //   print(c);
-  //   v.addAll(b);
-  //   b.removeAt(2);
-  //   b.addAll(v);
-  //   print("tttttt");
-  //   print(b);
-  // }
-
   @override
   void initState() {
-    // _aaa();
     super.initState();
     _getOccurrence();
   }
@@ -102,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           snapshot.requireData as QuerySnapshot?;
                       if (snapshot.hasError) {
                         return const Center(
-                          child: Text("Erro ao carregar as ocorrencias"),
+                          child: Text("Error ao carregar os ocorrências"),
                         );
                       } else {
                         if (snapshot.hasData) {
@@ -140,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         } else {
                           const Center(
-                            child: Text("nao há nenhum  registro"),
+                            child: Text("Não há nenhum  registro"),
                           );
                         }
                       }

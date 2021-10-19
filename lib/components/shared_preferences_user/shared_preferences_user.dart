@@ -12,7 +12,7 @@ class SharedPreferencesUser {
     try {
       await _preferences.setString("user", jsonEncode(usuario.toMap()));
     } catch (e) {
-      return Future.error("Erro ao salva seus dados no seu dispositivo ");
+      return Future.error("Error ao salva seus dados no seu dispositivo ");
     }
   }
 
@@ -22,7 +22,7 @@ class SharedPreferencesUser {
       final json = await jsonDecode(_preferences.get("user").toString());
       return Usuario.fromMap(json);
     } catch (e) {
-      return Future.error("Erro ao busca suas informações");
+      return Future.error("Error ao buscar suas informações");
     }
   }
 
@@ -32,7 +32,7 @@ class SharedPreferencesUser {
       _preferences.remove("user");
       _preferences.clear();
     } catch (e) {
-      return Future.error("Erro ao remove suas informações ");
+      return Future.error("Error ao remove suas informações ");
     }
   }
 }

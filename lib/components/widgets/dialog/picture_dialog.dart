@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '/screen/add_or_edit_occurrence/controller/add_or_edit_controller.dart';
 
@@ -19,12 +20,13 @@ class PictureDialog {
           children: [
             Stack(
               children: [
-                Positioned.fill(
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.6,
                   child:
                       addOrEditController.listImage[index].runtimeType != String
                           ? Image.file(
                               File(addOrEditController.listImage[index].path),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fitHeight,
                             )
                           : Image.network(addOrEditController.listImage[index]),
                 ),

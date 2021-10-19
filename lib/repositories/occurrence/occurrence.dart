@@ -6,12 +6,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '/model/occurrence/occurrence_model.dart';
 
 class FirebaseOccurrence {
-  // final FirebaseFirestore _db1 = FirebaseFirestore.instance;
   final CollectionReference _db =
       FirebaseFirestore.instance.collection('ocorrencias');
-  final FirebaseStorage _storage = FirebaseStorage.instance;
 
-  // final _collectionPath = "ocorrencias";
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   Future<void> saveOccurrence({required OccurrenceModel occurrence}) async {
     try {
@@ -60,8 +58,6 @@ class FirebaseOccurrence {
       return Future.error(e.toString());
     }
   }
-
-  Future<void> getOccurrence() async {}
 
   Future<void> deleteOccurrence({required OccurrenceModel occurrence}) async {
     try {

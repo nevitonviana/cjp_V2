@@ -1,4 +1,3 @@
-import 'package:cjp_v2/screen/feedback/components/widgets/massage_save.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -6,6 +5,7 @@ import 'package:mobx/mobx.dart';
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import '/screen/feedback/controller/feedback_controller.dart';
+import '../feedback/components/widgets/massage_save.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({Key? key}) : super(key: key);

@@ -33,12 +33,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          backgroundColor: Colors.grey[300],
           appBar: AppBar(
-            // leading: BackButton(
-            //   color: Colors.grey,
-            // ),
-            elevation: 4,
+            elevation: 2,
             backgroundColor: Colors.grey[300],
             title: const Text(
               "Cadastro",

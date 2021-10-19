@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cjp_v2/components/widgets/widgets.dart';
 import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 
 import '/components/theme/font/fonts.dart';
+import '/components/widgets/widgets.dart';
 import '/model/occurrence/occurrence_model.dart';
 import '../../../controller/home_controller.dart';
 
@@ -11,9 +11,11 @@ class CardCustom extends StatelessWidget {
   final OccurrenceModel occurrenceModel;
   final bool myOccurrence;
 
-  const CardCustom(
-      {Key? key, required this.occurrenceModel, required this.myOccurrence})
-      : super(key: key);
+  const CardCustom({
+    Key? key,
+    required this.occurrenceModel,
+    required this.myOccurrence,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
