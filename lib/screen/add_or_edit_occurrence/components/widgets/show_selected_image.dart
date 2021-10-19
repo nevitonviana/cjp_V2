@@ -26,13 +26,9 @@ class ShowSelectedImage extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () => PictureDialog().fullPicture(
-                  context: context,
-                  image: addOrEditController.listImage[index],
-                  addOrEditController: addOrEditController,
-                  id: addOrEditController.occurrence.id,
-                  imageReference:
-                      addOrEditController.occurrence.photoReference?[index],
-                ),
+                    context: context,
+                    index: index,
+                    addOrEditController: addOrEditController),
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: CircleAvatar(

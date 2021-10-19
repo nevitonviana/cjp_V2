@@ -211,16 +211,13 @@ abstract class _AddOrEditControllerBase with Store {
 
   ///delete image in firebase
   @action
-  Future<void> deleteImageInFirebase(
-      {required String photoReference,
-      required String id,
-      required String image}) async {
+  Future<void> deleteImageInFirebase({required int index}) async {
     try {
-      await FirebaseOccurrence()
-          .deletePhotoOccurrence(id: id, photoReference: [photoReference]);
-      occurrence.photoReference!
-          .removeWhere((element) => element == photoReference);
-      occurrence.listPhotos!.removeWhere((element) => element == image);
+      await FirebaseOccurrence().deletePhotoOccurrence(
+          id: occurrence.id!,
+          photoReference: [occurrence.photoReference![index]]);
+      occurrence.photoReference!.removeAt(index);
+      occurrence.listPhotos!.removeAt(index);
     } catch (e) {
       setMassageError(e.toString());
       return;
