@@ -95,6 +95,7 @@ class _FeedBackState extends State<FeedBack> {
                       ButtonAnimated(
                         controller: _feedBackController,
                         width: constraints.maxWidth * 0.4,
+                        name: "Salvar",
                       ),
                       const Divider(height: 15),
                     ],

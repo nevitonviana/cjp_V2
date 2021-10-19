@@ -142,8 +142,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       height: constraints.maxHeight * 0.05,
                     ),
                     ButtonAnimated(
-                        controller: _accountController,
-                        width: constraints.maxWidth * 0.5),
+                      controller: _accountController,
+                      width: constraints.maxWidth * 0.5,
+                      name: 'Entrar',
+                    ),
                   ],
                 ),
               ),

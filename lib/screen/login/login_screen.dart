@@ -103,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ButtonAnimated(
                     width: constraints.maxWidth * 0.6,
                     controller: _loginController,
+                    name: "Entrar",
                   ),
                   const SizedBox(height: 10),
                   TextButton(

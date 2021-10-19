@@ -5,9 +5,9 @@ import '/screen/profile/controller/profile_controller.dart';
 
 class PhotoProfile extends StatelessWidget {
   final ProfileController profileController;
-  double height;
+  final double height;
 
-  PhotoProfile({
+  const PhotoProfile({
     Key? key,
     required this.profileController,
     required this.height,

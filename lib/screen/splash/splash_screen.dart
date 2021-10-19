@@ -19,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() {
-    print(_userController.user?.toMap());
     super.didChangeDependencies();
     Timer(
       const Duration(seconds: 2),

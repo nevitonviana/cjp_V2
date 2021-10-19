@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ButtonSocial extends StatelessWidget {
-  String nome;
-  String image;
-  Function()? onTap;
+  final String nome;
+  final String image;
+  final Function()? onTap;
 
-  ButtonSocial({Key? key, required this.nome, required this.image, this.onTap})
+  const ButtonSocial(
+      {Key? key, required this.nome, required this.image, this.onTap})
       : super(key: key);
 
   @override

@@ -49,11 +49,12 @@ class _AddOrEditOccurrenceState extends State<AddOrEditOccurrence> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Adicionar Ocorrencia"),
+        title: Text(widget.occurrenceModel == null
+            ? "Adicionar Ocorrência"
+            : "Editar Ocorrência"),
         leading: BackButton(
           onPressed: () async {
             if (_addOrEditController.imageModification) {
-              print(3214566);
               await _addOrEditController.addOrEditOccurrence();
             }
             Navigator.of(context).pop();

@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class ButtonAnimated extends StatelessWidget {
-  dynamic controller;
+  final dynamic controller;
   final double width;
+  final String name;
 
-  ButtonAnimated({
+  const ButtonAnimated({
     Key? key,
     required this.controller,
     required this.width,
+    required this.name,
   }) : super(key: key);
 
   @override
@@ -35,9 +37,9 @@ class ButtonAnimated extends StatelessWidget {
                 ? const CircularProgressIndicator(
                     color: Colors.blue,
                   )
-                : const Text(
-                    "Entrar",
-                    style: TextStyle(color: Colors.black),
+                : Text(
+                    name,
+                    style: const TextStyle(color: Colors.black),
                   ),
           ),
         );
