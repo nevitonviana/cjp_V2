@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/model/occurrence/occurrence_model.dart';
+import 'components/widgets/list_view_image.dart';
 
 class OccurrenceDetailScreen extends StatelessWidget {
   final OccurrenceModel occurrenceModel;
@@ -25,30 +26,7 @@ class OccurrenceDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: constraints.minHeight * 0.3,
-                    width: constraints.minWidth * 0.95,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: occurrenceModel.listPhotos!.length,
-                      itemBuilder: (_, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            // _imageFull(widget.ocorrencia.fotos![index]);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                top: constraints.minHeight * 0.05),
-                            padding: const EdgeInsets.only(right: 15),
-                            child: Image.network(
-                              occurrenceModel.listPhotos![index],
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  ListViewImage(occurrenceModel: occurrenceModel),
                   Divider(height: constraints.maxHeight * 0.06),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -36,23 +36,21 @@ class PictureDialog {
                 ),
               ],
             ),
-            Visibility(
-              child: TextButton(
-                onPressed: () async {
-                  if (addOrEditController.listImage[index].runtimeType ==
-                      String) {
-                    await addOrEditController.deleteImageInFirebase(
-                        index: index);
-                  }
-                  addOrEditController.listImage.removeAt(index);
+            TextButton(
+              onPressed: () async {
+                if (addOrEditController.listImage[index].runtimeType ==
+                    String) {
+                  await addOrEditController.deleteImageInFirebase(
+                      index: index);
+                }
+                addOrEditController.listImage.removeAt(index);
 
-                  Navigator.pop(context);
-                },
-                child: const Text("Excluir"),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(
-                    Colors.red,
-                  ),
+                Navigator.pop(context);
+              },
+              child: const Text("Excluir"),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  Colors.red,
                 ),
               ),
             ),
