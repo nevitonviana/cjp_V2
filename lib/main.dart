@@ -14,6 +14,7 @@ Future<void> main() async {
     MaterialApp(
       title: 'CJP',
       theme: theme,
+      // home: const SplashScreen(),
       initialRoute: "/",
       onGenerateRoute: RouteGenerate.generateRoute,
     ),
