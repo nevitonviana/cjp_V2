@@ -180,6 +180,21 @@ mixin _$AccountController on _AccountControllerBase, Store {
     });
   }
 
+  final _$isSaveAtom = Atom(name: '_AccountControllerBase.isSave');
+
+  @override
+  bool get isSave {
+    _$isSaveAtom.reportRead();
+    return super.isSave;
+  }
+
+  @override
+  set isSave(bool value) {
+    _$isSaveAtom.reportWrite(value, super.isSave, () {
+      super.isSave = value;
+    });
+  }
+
   final _$errorMessageAtom = Atom(name: '_AccountControllerBase.errorMessage');
 
   @override
@@ -295,6 +310,17 @@ mixin _$AccountController on _AccountControllerBase, Store {
   }
 
   @override
+  void setIsSave(bool value) {
+    final _$actionInfo = _$_AccountControllerBaseActionController.startAction(
+        name: '_AccountControllerBase.setIsSave');
+    try {
+      return super.setIsSave(value);
+    } finally {
+      _$_AccountControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setErrorMessage(String value) {
     final _$actionInfo = _$_AccountControllerBaseActionController.startAction(
         name: '_AccountControllerBase.setErrorMessage');
@@ -316,6 +342,7 @@ password: ${password},
 repeatPassword: ${repeatPassword},
 obscureText: ${obscureText},
 loading: ${loading},
+isSave: ${isSave},
 errorMessage: ${errorMessage},
 nameValid: ${nameValid},
 districtValid: ${districtValid},

@@ -1,3 +1,4 @@
+import 'package:cjp_v2/route_generate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -26,6 +27,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         );
       }
     });
+    when(
+      (_) => _accountController.isSave,
+      () => Navigator.of(context).pushReplacementNamed(RouteGenerate.routeHome),
+    );
   }
 
   @override

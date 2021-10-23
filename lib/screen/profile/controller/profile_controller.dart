@@ -163,7 +163,6 @@ abstract class _ProfileControllerBase with Store {
       }
     } catch (e) {
       setMassageError(e.toString());
-      return;
     }
     setLoading(false);
   }

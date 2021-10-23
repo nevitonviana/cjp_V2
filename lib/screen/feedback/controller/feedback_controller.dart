@@ -91,7 +91,6 @@ abstract class _FeedBackControllerBase with Store {
           .then((value) => setSaveFeedback(true));
     } catch (e) {
       setMessageError(e.toString());
-      return;
     }
     setLoading(false);
   }

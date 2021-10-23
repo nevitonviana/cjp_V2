@@ -109,7 +109,6 @@ abstract class _LoginControllerBase with Store {
     } catch (e) {
       setError(e.toString());
       await Facebook().logOut();
-      return;
     }
   }
 
@@ -133,9 +132,7 @@ abstract class _LoginControllerBase with Store {
       setLoginConfirmed(true);
     } catch (e) {
       setError(e.toString());
-
-      return;
+      await Google().signOut();
     }
-    await Google().signOut();
   }
 }

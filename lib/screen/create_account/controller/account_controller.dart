@@ -140,6 +140,13 @@ abstract class _AccountControllerBase with Store {
   @action
   void setLoading(bool value) => loading = value;
 
+  ///issave
+  @observable
+  bool isSave = false;
+
+  @action
+  void setIsSave(bool value) => isSave = value;
+
   ///button
   @computed
   dynamic get pressed => emailValid &&
@@ -159,6 +166,7 @@ abstract class _AccountControllerBase with Store {
 
   @action
   Future<void> _createAccount() async {
+    setLoading(true);
     Usuario _usuario = Usuario(
       name: name!,
       district: district!,
@@ -171,11 +179,13 @@ abstract class _AccountControllerBase with Store {
           .createUser(email: email!, password: password!)
           .then((value) async {
         Usuario? _result = await FirebaseUser().saveInfoUser(usuario: _usuario);
+        print(_result!.toMap());
         await _userController.saveInfoUserSharedPreferences(user: _result!);
+        setIsSave(true);
       });
     } catch (e) {
       setErrorMessage(e.toString());
-      return;
     }
+    setLoading(false);
   }
 }
