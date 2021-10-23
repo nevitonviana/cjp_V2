@@ -23,8 +23,9 @@ class DrawerHeaderCustom extends StatelessWidget {
           currentAccountPicture: CircleAvatar(
             radius: 55,
             backgroundImage: CachedNetworkImageProvider(
-              _controller.user?.photoUrl ??
-                  "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392",
+              _controller.user!.photoUrl.isNotEmpty
+                  ? _controller.user!.photoUrl
+                  : "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392",
               scale: 20,
             ),
           ),

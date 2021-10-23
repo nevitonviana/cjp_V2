@@ -8,6 +8,14 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
+  ///massage error
+  @observable
+  String? massageError;
+
+  @action
+  void setMassageError(String value) => massageError = value;
+
+  /// delete my occurrence
   @action
   Future<void> deleteMyOccurrence(
       {required OccurrenceModel occurrenceModel}) async {
@@ -15,7 +23,7 @@ abstract class _HomeControllerBase with Store {
     try {
       await _firebaseOccurrence.deleteOccurrence(occurrence: occurrenceModel);
     } catch (e) {
-      return;
+      setMassageError(e.toString());
     }
   }
 }

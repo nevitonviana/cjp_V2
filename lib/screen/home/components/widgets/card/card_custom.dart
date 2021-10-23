@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
 import '/components/theme/font/fonts.dart';
 import '/components/widgets/widgets.dart';
 import '/model/occurrence/occurrence_model.dart';
 import '../../../controller/home_controller.dart';
 
-class CardCustom extends StatelessWidget {
+class CardCustom extends StatefulWidget {
   final OccurrenceModel occurrenceModel;
   final bool myOccurrence;
 
@@ -18,11 +19,28 @@ class CardCustom extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CardCustom> createState() => _CardCustomState();
+}
+
+class _CardCustomState extends State<CardCustom> {
+  final HomeController _homeController = HomeController();
+
+  @override
+  void initState() {
+    super.initState();
+    autorun((_) {
+      if (_homeController.massageError != null) {
+        ErrorDialog()
+            .error(context: context, error: _homeController.massageError!);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final HomeController _homeController = HomeController();
     return Card(
       color: Colors.grey.shade400,
-      shadowColor: occurrenceModel.status ? Colors.green : Colors.red,
+      shadowColor: widget.occurrenceModel.status ? Colors.green : Colors.red,
       clipBehavior: Clip.antiAlias,
       elevation: 6,
       child: Column(
@@ -40,7 +58,7 @@ class CardCustom extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: CachedNetworkImageProvider(
-                          occurrenceModel.listPhotos![0],
+                          widget.occurrenceModel.listPhotos![0],
                         ),
                         fit: BoxFit.cover),
                   ),
@@ -59,13 +77,13 @@ class CardCustom extends StatelessWidget {
                       ),
                       height: 28,
                       width: 140,
-                      color: occurrenceModel.status
+                      color: widget.occurrenceModel.status
                           ? Colors.green
                           : Colors.red.withOpacity(0.7),
                       child: Row(
                         children: [
                           Icon(
-                            occurrenceModel.status
+                            widget.occurrenceModel.status
                                 ? Icons.sentiment_satisfied_alt
                                 : Icons.sentiment_dissatisfied_outlined,
                             color: Colors.white,
@@ -73,7 +91,7 @@ class CardCustom extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            occurrenceModel.status
+                            widget.occurrenceModel.status
                                 ? "Respondida"
                                 : "Não Respondida",
                             style: Fonts.fontsNotoSerif,
@@ -83,13 +101,13 @@ class CardCustom extends StatelessWidget {
                     ),
                   ),
                 ),
-                myOccurrence
+                widget.myOccurrence
                     ? Align(
                         alignment: Alignment.topRight,
                         child: GestureDetector(
                           onTap: () => DeleteDialog().delete(
                               context: context,
-                              occurrenceModel: occurrenceModel,
+                              occurrenceModel: widget.occurrenceModel,
                               homeController: _homeController),
                           child: Container(
                             margin: const EdgeInsets.only(
@@ -125,7 +143,7 @@ class CardCustom extends StatelessWidget {
                       style: Fonts.fontsLato,
                     ),
                     subtitle: Text(
-                      occurrenceModel.road.toString(),
+                      widget.occurrenceModel.road.toString(),
                       style: Fonts.fontsRoboto,
                     ),
                   ),
@@ -137,7 +155,7 @@ class CardCustom extends StatelessWidget {
                       style: Fonts.fontsLato,
                     ),
                     subtitle: Text(
-                      occurrenceModel.nameOccurrence.toString(),
+                      widget.occurrenceModel.nameOccurrence.toString(),
                       style: Fonts.fontsRoboto,
                     ),
                   ),

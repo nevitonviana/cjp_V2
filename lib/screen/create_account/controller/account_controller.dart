@@ -179,7 +179,6 @@ abstract class _AccountControllerBase with Store {
           .createUser(email: email!, password: password!)
           .then((value) async {
         Usuario? _result = await FirebaseUser().saveInfoUser(usuario: _usuario);
-        print(_result!.toMap());
         await _userController.saveInfoUserSharedPreferences(user: _result!);
         setIsSave(true);
       });
