@@ -1,8 +1,7 @@
-import 'package:cjp_v2/components/theme/font/fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '/components/theme/font/fonts.dart';
 
 class ButtonAnimated extends StatelessWidget {
   final dynamic controller;

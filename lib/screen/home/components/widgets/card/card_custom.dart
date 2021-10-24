@@ -1,5 +1,5 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -63,16 +63,15 @@ class _CardCustomState extends State<CardCustom> {
                         fit: BoxFit.cover),
                   ),
                 ),
-                Entry.offset(
-                  xOffset: -200,
-                  yOffset: 100,
-                  delay: const Duration(seconds: 1),
+                AnimatedCard(
+                  initOffset: const Offset(-200, 100),
+                  initDelay: const Duration(seconds: 1),
                   duration: const Duration(milliseconds: 200),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Container(
                       margin: const EdgeInsets.only(
-                        top: 6,
+                        top: 9,
                         left: 8,
                       ),
                       height: 28,
@@ -92,8 +91,8 @@ class _CardCustomState extends State<CardCustom> {
                           const SizedBox(width: 6),
                           Text(
                             widget.occurrenceModel.status
-                                ? "Respondida"
-                                : "Não Respondida",
+                                ? "Respondido"
+                                : "Não Respondido",
                             style: Fonts.fontsNotoSerif,
                           ),
                         ],
@@ -101,34 +100,32 @@ class _CardCustomState extends State<CardCustom> {
                     ),
                   ),
                 ),
-                widget.myOccurrence
-                    ? Align(
+                if (widget.myOccurrence)
+                  GestureDetector(
+                    onTap: () => DeleteDialog().delete(
+                        context: context,
+                        occurrenceModel: widget.occurrenceModel,
+                        homeController: _homeController),
+                    child: AnimatedCard(
+                      initOffset: const Offset(200, 100),
+                      initDelay: const Duration(seconds: 1),
+                      duration: const Duration(milliseconds: 200),
+                      child: Align(
                         alignment: Alignment.topRight,
-                        child: GestureDetector(
-                          onTap: () => DeleteDialog().delete(
-                              context: context,
-                              occurrenceModel: widget.occurrenceModel,
-                              homeController: _homeController),
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 6,
-                              left: 11,
-                            ),
-                            child: const Entry.offset(
-                              xOffset: 200,
-                              yOffset: 100,
-                              delay: Duration(seconds: 1),
-                              duration: Duration(milliseconds: 200),
-                              child: Icon(
-                                Icons.delete_forever,
-                                color: Colors.red,
-                                size: 35,
-                              ),
-                            ),
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            top: 5,
+                            left: 3,
+                          ),
+                          child: const Icon(
+                            Icons.delete_forever,
+                            color: Colors.red,
+                            size: 35,
                           ),
                         ),
-                      )
-                    : Container(),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -151,7 +148,7 @@ class _CardCustomState extends State<CardCustom> {
                 Expanded(
                   child: ListTile(
                     title: Text(
-                      "Nome da ocorrencia",
+                      "Nome da ocorrência",
                       style: Fonts.fontsLato,
                     ),
                     subtitle: Text(

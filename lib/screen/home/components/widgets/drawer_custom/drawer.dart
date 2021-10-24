@@ -43,11 +43,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
               MenuButtonCustom(
                 onTap: () => Navigator.pushNamed(
                     context, RouteGenerate.routeAddOccurrence),
-                text: "Adicionar Ocorrencia",
+                text: "Adicionar Ocorrência",
                 icons: Icons.note_alt_outlined,
               ),
               MenuButtonCustom(
-                text: "Minhas Ocorrencias",
+                text: "Minhas Ocorrências",
                 icons: Icons.list_alt_rounded,
                 onTap: () => Navigator.pushNamed(
                   context,

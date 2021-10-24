@@ -33,10 +33,14 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    _animation =
-        Tween<double>(end: 80, begin: 0.9).animate(_animationController);
-    _animation2 =
-        Tween<double>(end: 50, begin: 0.9).animate(_animationController);
+    _animation = Tween<double>(end: 80, begin: 0.9).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Interval(0.4, 1, curve: Curves.easeOutBack),
+    ));
+    _animation2 = Tween<double>(end: 50, begin: 0.9).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Interval(0.4, 1, curve: Curves.easeOutBack),
+    ));
     _animationController.forward();
   }
 

@@ -13,6 +13,7 @@ class MenuButtonCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedCard(
+      curve: Curves.slowMiddle,
       direction: AnimatedCardDirection.left,
       duration: const Duration(seconds: 2),
       child: Container(
