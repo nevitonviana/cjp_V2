@@ -41,8 +41,17 @@ class FirebaseUser {
   Future<void> createUser(
       {required String email, required String password}) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((_) => sendEmailVerification());
+    } catch (e) {
+      return Future.error(FirebaseError.getDescription(e.hashCode).toString());
+    }
+  }
+
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser!.sendEmailVerification();
     } catch (e) {
       return Future.error(FirebaseError.getDescription(e.hashCode).toString());
     }
