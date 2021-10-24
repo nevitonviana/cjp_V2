@@ -11,14 +11,13 @@ class FirebaseUser {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // t() async {
-  //   final a = _auth.confirmPasswordReset(code: code, newPassword: newPassword)
-  // }
-
   Future<void> signIn({required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
+      print(999999999);
+      print(e);
+      print(e.hashCode);
       return Future.error(FirebaseError.getDescription(e.hashCode).toString());
     }
   }
@@ -31,7 +30,13 @@ class FirebaseUser {
     }
   }
 
-  Future<void> signOut() async {}
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
 
   Future<void> createUser(
       {required String email, required String password}) async {
