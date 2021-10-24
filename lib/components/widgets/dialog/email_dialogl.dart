@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class EmailDialog {
-  success({required BuildContext context, required String error}) async {
+  success({
+    required BuildContext context,
+    required String massage,
+    required String title,
+    VoidCallback? route,
+  }) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -14,8 +19,8 @@ class EmailDialog {
                 height: 40,
                 width: double.infinity,
                 color: Colors.blueGrey,
-                child: const Text(
-                  "Enviado email com sucesso",
+                child: Text(
+                  title,
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
@@ -23,12 +28,12 @@ class EmailDialog {
                 alignment: Alignment.center,
                 height: 90,
                 child: Text(
-                  error,
+                  massage,
                   textAlign: TextAlign.center,
                 ),
               ),
               GestureDetector(
-                onTap: Navigator.of(context).pop,
+                onTap: route != null ? route : Navigator.of(context).pop,
                 child: Container(
                   padding: const EdgeInsets.all(15),
                   alignment: Alignment.bottomRight,

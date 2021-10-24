@@ -31,7 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_loginController.emailSuccessfullySent) {
         EmailDialog().success(
             context: context,
-            error:
+            title: "Enviado email com sucesso",
+            massage:
                 "Um email de redefinição de senha,\nfoi enviado com sucesso para"
                 " para o email${_loginController.email}.\n Por favor verifique"
                 " a caixa de spam/lixo eletrônico");
