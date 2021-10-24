@@ -214,7 +214,7 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
-  void setError(String value) {
+  void setError(String? value) {
     final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
         name: '_LoginControllerBase.setError');
     try {

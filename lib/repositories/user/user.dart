@@ -15,9 +15,6 @@ class FirebaseUser {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
-      print(999999999);
-      print(e);
-      print(e.hashCode);
       return Future.error(FirebaseError.getDescription(e.hashCode).toString());
     }
   }

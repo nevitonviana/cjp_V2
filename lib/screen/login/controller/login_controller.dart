@@ -88,7 +88,7 @@ abstract class _LoginControllerBase with Store {
   String? error;
 
   @action
-  void setError(String value) => error = value;
+  void setError(String? value) => error = value;
 
   //signInFacebook
   Future signInFacebook() async {
@@ -150,7 +150,6 @@ abstract class _LoginControllerBase with Store {
     } catch (e) {
       setError(e.toString());
     }
-    setEmailSuccessfullySent(false);
   }
 
   ///Email successfully sent

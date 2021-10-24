@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           error: _loginController.error!,
         );
+        _loginController.setError(null);
       }
       if (_loginController.emailSuccessfullySent) {
         EmailDialog().success(
@@ -36,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 "Um email de redefinição de senha,\nfoi enviado com sucesso para"
                 " para o email${_loginController.email}.\n Por favor verifique"
                 " a caixa de spam/lixo eletrônico");
+        _loginController.setEmailSuccessfullySent(false);
       }
     });
     when((_) => _loginController.loginConfirmed, () {
