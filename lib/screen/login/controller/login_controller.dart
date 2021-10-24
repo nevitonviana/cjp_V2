@@ -135,4 +135,28 @@ abstract class _LoginControllerBase with Store {
       await Google().signOut();
     }
   }
+
+  ///password Reset
+  @action
+  Future<void> passwordReset() async {
+    try {
+      if (emailValid) {
+        await FirebaseUser()
+            .sendPasswordResetEmail(email: email!)
+            .then((_) => setEmailSuccessfullySent(true));
+      } else {
+        setError("insira um Email válido");
+      }
+    } catch (e) {
+      setError(e.toString());
+    }
+    setEmailSuccessfullySent(false);
+  }
+
+  ///Email successfully sent
+  @observable
+  bool emailSuccessfullySent = false;
+
+  @action
+  void setEmailSuccessfullySent(bool value) => emailSuccessfullySent = value;
 }

@@ -5,8 +5,8 @@ import 'package:mobx/mobx.dart';
 
 import '/components/widgets/widgets.dart';
 import '/route_generate.dart';
+import 'components/widgets.dart';
 import 'controller/login_controller.dart';
-import 'widgets/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,6 +27,14 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           error: _loginController.error!,
         );
+      }
+      if (_loginController.emailSuccessfullySent) {
+        EmailDialog().success(
+            context: context,
+            error:
+                "Um email de redefinição de senha,\nfoi enviado com sucesso para"
+                " para o email${_loginController.email}.\n Por favor verifique"
+                " a caixa de spam/lixo eletrônico");
       }
     });
     when((_) => _loginController.loginConfirmed, () {
@@ -99,7 +107,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                   ),
-                  const SizedBox(height: 15),
+                  Container(
+                    alignment: Alignment.topRight,
+                    margin: EdgeInsets.only(right: 30),
+                    child: TextButton(
+                      onPressed: _loginController.passwordReset,
+                      child: const Text(
+                        "Esqueceu a senha",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ),
                   ButtonAnimated(
                     width: constraints.maxWidth * 0.6,
                     controller: _loginController,

@@ -123,11 +123,36 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$emailSuccessfullySentAtom =
+      Atom(name: '_LoginControllerBase.emailSuccessfullySent');
+
+  @override
+  bool get emailSuccessfullySent {
+    _$emailSuccessfullySentAtom.reportRead();
+    return super.emailSuccessfullySent;
+  }
+
+  @override
+  set emailSuccessfullySent(bool value) {
+    _$emailSuccessfullySentAtom.reportWrite(value, super.emailSuccessfullySent,
+        () {
+      super.emailSuccessfullySent = value;
+    });
+  }
+
   final _$_loginAsyncAction = AsyncAction('_LoginControllerBase._login');
 
   @override
   Future<void> _login() {
     return _$_loginAsyncAction.run(() => super._login());
+  }
+
+  final _$passwordResetAsyncAction =
+      AsyncAction('_LoginControllerBase.passwordReset');
+
+  @override
+  Future<void> passwordReset() {
+    return _$passwordResetAsyncAction.run(() => super.passwordReset());
   }
 
   final _$_LoginControllerBaseActionController =
@@ -200,6 +225,17 @@ mixin _$LoginController on _LoginControllerBase, Store {
   }
 
   @override
+  void setEmailSuccessfullySent(bool value) {
+    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
+        name: '_LoginControllerBase.setEmailSuccessfullySent');
+    try {
+      return super.setEmailSuccessfullySent(value);
+    } finally {
+      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 email: ${email},
@@ -208,6 +244,7 @@ visibilityPassword: ${visibilityPassword},
 loginConfirmed: ${loginConfirmed},
 loading: ${loading},
 error: ${error},
+emailSuccessfullySent: ${emailSuccessfullySent},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
 pressed: ${pressed}
