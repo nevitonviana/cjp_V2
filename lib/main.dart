@@ -12,6 +12,7 @@ Future<void> main() async {
   setupLocators();
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'CJP',
       theme: theme,
       initialRoute: "/",

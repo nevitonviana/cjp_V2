@@ -9,18 +9,21 @@ class Google {
     ],
   );
 
-  Future<OAuthCredential> signIn() async {
+  Future<OAuthCredential?> signIn() async {
     try {
       final _user = await _googleUser.signIn();
 
       final GoogleSignInAuthentication? googleAuth =
           await _user?.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-      return credential;
+      if (googleAuth != null) {
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        return credential;
+      } else {
+        return null;
+      }
     } catch (e) {
       return Future.error(e);
     }

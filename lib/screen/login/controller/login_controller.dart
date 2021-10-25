@@ -117,19 +117,20 @@ abstract class _LoginControllerBase with Store {
     Usuario _usuario = Usuario();
     try {
       final credential = await Google().signIn();
+      if (credential != null) {
+        final result =
+            await FirebaseUser().signInCredential(credential: credential);
 
-      final result =
-          await FirebaseUser().signInCredential(credential: credential);
+        _usuario.id = result!.user!.uid;
+        _usuario.email = result.user!.email!;
+        _usuario.name = result.user!.displayName!;
+        _usuario.photoUrl = result.user!.photoURL!;
+        _usuario.isLogin = "google";
 
-      _usuario.id = result!.user!.uid;
-      _usuario.email = result.user!.email!;
-      _usuario.name = result.user!.displayName!;
-      _usuario.photoUrl = result.user!.photoURL!;
-      _usuario.isLogin = "google";
+        await _userController.saveInfoUserSharedPreferences(user: _usuario);
 
-      await _userController.saveInfoUserSharedPreferences(user: _usuario);
-
-      setLoginConfirmed(true);
+        setLoginConfirmed(true);
+      }
     } catch (e) {
       setError(e.toString());
       await Google().signOut();
